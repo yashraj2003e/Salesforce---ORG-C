@@ -60,11 +60,11 @@ public class scramblingBatch implements Database.Batchable<SObject>,Database.sta
             Set<ID> accountIds = new Set<ID>();
             
             for(contact con : contactsToScramble) {
-                con.firstName = (con.firstName == null ? '' : con.firstName) + 'optOut';
-                con.lastName = (con.lastName == null ? '' : con.lastName) + 'optOut';
+                con.firstName = (con.firstName == null ? '' : con.firstName) + yashOrgCConstants.OPT_OUT;
+                con.lastName = (con.lastName == null ? '' : con.lastName) + yashOrgCConstants.OPT_OUT;
                 con.isactive__c = false;
                 con.opt_out_yri__c = 'opt out';
-                con.email = (con.email == null ? '' : con.email) + '.invalid';
+                con.email = (con.email == null ? '' : con.email) + yashOrgCConstants.INVALID;
                 if(con.accountId != null) accountIds.add(con.accountID);
                 if(con.user__c != null) userIds.add(con.user__c);
             }
@@ -84,7 +84,7 @@ public class scramblingBatch implements Database.Batchable<SObject>,Database.sta
             List<account> accountsToScramble = new List<account>();
             
             for(account ac : [select id,name from account where id in :accountIDs]) {
-                ac.name = (ac.name == null ? '' : ac.name) + 'optout';
+                ac.name = (ac.name == null ? '' : ac.name) + yashOrgCConstants.OPT_OUT;
                 accountsToScramble.add(ac);
             }
             
@@ -101,10 +101,10 @@ public class scramblingBatch implements Database.Batchable<SObject>,Database.sta
             List<user> usersToScramble = new List<user>();
             
             for(user u : users) {
-                u.firstName = (u.firstName == null ? '' : u.firstName) + 'optout';
-                u.lastName = (u.lastName == null ? '' : u.lastName) + 'optout';
-                u.userName = u.userName + '.invalid';
-                u.federationIdentifier = (u.federationIdentifier == null ? '' : u.federationIdentifier) + '.invalid';
+                u.firstName = (u.firstName == null ? '' : u.firstName) + yashOrgCConstants.OPT_OUT;
+                u.lastName = (u.lastName == null ? '' : u.lastName) + yashOrgCConstants.OPT_OUT;
+                u.userName = u.userName + yashOrgCConstants.INVALID;
+                u.federationIdentifier = (u.federationIdentifier == null ? '' : u.federationIdentifier) + yashOrgCConstants.INVALID;
                 u.isactive = false;
                 usersToScramble.add(u);
             }

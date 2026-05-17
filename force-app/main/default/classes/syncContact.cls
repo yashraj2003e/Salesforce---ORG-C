@@ -67,8 +67,12 @@ global without sharing class syncContact {
                 }
             }
 
-            insert contactsToInsert;
-            update contactsToUpdate;
+            if(!contactsToInsert.isEmpty()) {
+                insert contactsToInsert;
+            }
+            else {
+                update contactsToUpdate;
+            }
         }
         catch(Exception e) {
             errorLog.createErrorLog(e, syncContactsyncContactMethod);
