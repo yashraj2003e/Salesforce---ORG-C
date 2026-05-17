@@ -20,7 +20,6 @@ public class SyncContactQueueable implements Queueable, Database.AllowsCallouts 
         }
         
         this.updatedContact = mappedData;
-        System.debug(this.updatedContact);
     }
  
     public void execute(QueueableContext qc) {
@@ -28,7 +27,6 @@ public class SyncContactQueueable implements Queueable, Database.AllowsCallouts 
     HttpRequest req = new HttpRequest();
         
     yashorgb_integration_config__mdt config = yashorgb_integration_config__mdt.getInstance('sync_Contact');
-	System.debug(updatedContact);
     req.setEndpoint('callout:yashorgb'+config.endpoint__c);
     req.setMethod('POST');
     req.setHeader('Content-Type','application/json');
@@ -40,8 +38,5 @@ public class SyncContactQueueable implements Queueable, Database.AllowsCallouts 
         String resultData = res.getBody() + res.getStatusCode();
 		errorLog.createErrorLog(resultData,syncContactQueueableExecute);        
     }
-
-    System.debug(res.getBody());
-    System.debug(res.getStatusCode());
 }
 }
