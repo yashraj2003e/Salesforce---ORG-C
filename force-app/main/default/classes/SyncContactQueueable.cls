@@ -23,20 +23,26 @@ public class SyncContactQueueable implements Queueable, Database.AllowsCallouts 
     }
  
     public void execute(QueueableContext qc) {
-    Http http = new Http();
-    HttpRequest req = new HttpRequest();
-        
-    yashorgb_integration_config__mdt config = yashorgb_integration_config__mdt.getInstance('sync_Contact');
-    req.setEndpoint('callout:yashorgb'+config.endpoint__c);
-    req.setMethod('POST');
-    req.setHeader('Content-Type','application/json');
-    req.setBody(JSON.serialize(updatedContact));
+    try {
+        Http http = new Http();
+        HttpRequest req = new HttpRequest();
+            
+        yashorgb_integration_config__mdt config = yashorgb_integration_config__mdt.getInstance('sync_Contact');
+        req.setEndpoint('callout:yashorgb'+config.endpoint__c);
+        req.setMethod('POST');
+        req.setHeader('Content-Type','application/json');
+        req.setBody(JSON.serialize(updatedContact));
 
-    HttpResponse res = http.send(req);
-        
-    if(res.getStatusCode() != 200) {
-        String resultData = res.getBody() + res.getStatusCode();
-		errorLog.createErrorLog(resultData,syncContactQueueableExecute);        
+        HttpResponse res = http.send(req);
+            
+        if(res.getStatusCode() != 200) {
+            String resultData = res.getBody() + res.getStatusCode();
+            errorLog.createErrorLog(resultData,syncContactQueueableExecute);        
+        }
+    }
+    catch(Exception e) {
+        errorLog.createErrorLog(e,syncContactQueueableExecute);
+        throw e;
     }
 }
 }
