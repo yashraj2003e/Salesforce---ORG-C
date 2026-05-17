@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ManagedTopics xmlns="http://soap.sforce.com/2006/04/metadata">
+    <managedTopic>
+        <fullName>spTest.Content:Test</fullName>
+        <managedTopicType>Content</managedTopicType>
+        <name>Test</name>
+        <parentName></parentName>
+        <position>0</position>
+        <topicDescription>test topic</topicDescription>
+    </managedTopic>
+    <managedTopic>
+        <fullName>spTest.Featured:Test</fullName>
+        <managedTopicType>Featured</managedTopicType>
+        <name>Test</name>
+        <parentName></parentName>
+        <position>0</position>
+        <topicDescription>test topic</topicDescription>
+    </managedTopic>
+</ManagedTopics>

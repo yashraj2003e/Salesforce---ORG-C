@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>balance_cannot_be_modified</fullName>
+    <active>true</active>
+    <description>Balance cannot be modified while creation or update</description>
+    <errorConditionFormula>OR(
+AND(ISNEW(),award_points__c!=0)
+)</errorConditionFormula>
+    <errorDisplayField>award_points__c</errorDisplayField>
+    <errorMessage>Balance cannot be modified manually during creation</errorMessage>
+</ValidationRule>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>yashraj@ibm.com</contactEmail>
+    <label>yashorgb</label>
+    <samlConfig>
+        <acsUrl>https://yashorgb-dev-ed.develop.my.salesforce.com</acsUrl>
+        <certificate>MIIEgDCCA2igAwIBAgIOAZ4oGcVBAAAAAEj8bLowDQYJKoZIhvcNAQELBQAwezEUMBIGA1UEAwwLeWFzaG9yZ2Jfc3AxGDAWBgNVBAsMDzAwRGdMMDAwMDBOUUxsNzEXMBUGA1UECgwOU2FsZXNmb3JjZS5jb20xFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xCzAJBgNVBAgMAkNBMQswCQYDVQQGEwJVUzAeFw0yNjA1MTQyMDA3MThaFw0yNzA1MTQxMjAwMDBaMHsxFDASBgNVBAMMC3lhc2hvcmdiX3NwMRgwFgYDVQQLDA8wMERnTDAwMDAwTlFMbDcxFzAVBgNVBAoMDlNhbGVzZm9yY2UuY29tMRYwFAYDVQQHDA1TYW4gRnJhbmNpc2NvMQswCQYDVQQIDAJDQTELMAkGA1UEBhMCVVMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCqqwTcR/+99ZVzXR3lSnDFVjFpqCcHa0cJ93x6SXuBAKpVGP/ut1ojE0uXan9IlgsN5GG2mpeQKTXrPtzAfnII+OsnwHXz5/DXqDgKqmpKGKef+MGa9t3pKOiySXrXG3PFjGW2jeo8mRNvGRpJdh0WWJaWx8HTkNWE1vm1fTU0RMnpWfUYyHCT2hAPXuTjn0g7V1Sv6aAK5386fM7UhuIrnXf6setaYcT8MjaFCJ0l2j++bYXsHuiqMPUG0ZykyxvxNwadnTmrbeQwLNWbkYRSpfCoYmaqfSHaHC35+f+hAV8N5hRj33unzq1ZgtxV2XMfoHCt8Us2OsAfgBCOriHHAgMBAAGjggEAMIH9MB0GA1UdDgQWBBSv41XqWKiyy0zyXgmCxI/Zd8wHUDAWBgNVHREEDzANggt5YXNob3JnYl9zcDAPBgNVHRMBAf8EBTADAQH/MIGyBgNVHSMEgaowgaeAFK/jVepYqLLLTPJeCYLEj9l3zAdQoX+kfTB7MRQwEgYDVQQDDAt5YXNob3JnYl9zcDEYMBYGA1UECwwPMDBEZ0wwMDAwME5RTGw3MRcwFQYDVQQKDA5TYWxlc2ZvcmNlLmNvbTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzELMAkGA1UECAwCQ0ExCzAJBgNVBAYTAlVTgg4BnigZxUEAAAAASPxsujANBgkqhkiG9w0BAQsFAAOCAQEAYnxzSlsLhRX2YpGNHVwCiHc07gtl7ehdMRKX9Fc5NuON0SSTMEsSvsyv7T3RoYTeF3e1g69p8o9gmL8Orxx+/nxsiaUkUyeSF25sTCa5g9H2470h9mvQB9CBVrhLmuyuzbyXZHUX11jsoo37f9k9TXhACR+aeyjlSiQSV024zyvFimXOKOX2pn++wNnBW38W1cL0JUgcQAxQeNq7KiX69F4GhYTbwAGq/Wg6LzOjTzV2SbcVgFPGw5fEq1xv+LweMIDyVNMkiE+rP4Y1I4Qwd4waW+nRago5Z5qw+gvl2e070PFxH+yMPMD17dTWTvxvuB2Oe3G0ZwUViGToV9N1yw==</certificate>
+        <encryptionType>AES_128</encryptionType>
+        <entityUrl>https://yashorgb-dev-ed.develop.my.salesforce.com</entityUrl>
+        <issuer>https://yashorgc-dev-ed.develop.my.salesforce.com</issuer>
+        <samlIdpSLOBindingEnum>RedirectBinding</samlIdpSLOBindingEnum>
+        <samlNameIdFormat>Unspecified</samlNameIdFormat>
+        <samlSigningAlgoType>SHA256</samlSigningAlgoType>
+        <samlSloUrl>https://yashorgc-dev-ed.develop.my.salesforce.com/services/auth/idp/saml2/logout</samlSloUrl>
+        <samlSubjectType>FederationId</samlSubjectType>
+    </samlConfig>
+    <startUrl>https://yashorgb-dev-ed.develop.my.salesforce.com</startUrl>
+</ConnectedApp>

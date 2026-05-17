@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DashboardFolder xmlns="http://soap.sforce.com/2006/04/metadata">
+    <folderShares>
+        <accessLevel>Manage</accessLevel>
+        <sharedTo>epic.208c3c58af28@orgfarm.salesforce.com</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <folderShares>
+        <accessLevel>Manage</accessLevel>
+        <sharedTo>yashorgc@agentforce.com</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <name>PRM Dashboards</name>
+</DashboardFolder>
