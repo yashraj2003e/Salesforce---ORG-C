@@ -1,10 +1,10 @@
 public class scramblingBatch implements Database.Batchable<SObject>,Database.stateful {
     
-    String strScramblingBatchExecute = 'scramblingBatch.execute';
-    String strScramblingBatchFinish = 'scramblingBatch.finish';
-    String strScramblingBatchexecuteScramblingNonSetupObjects = 'scramblingBatch.executeScramblingNonSetupObjects';
-    String strScramblingBatchexecuteScramblingSetupObjects = 'scramblingBatch.executeScramblingSetupObjects';
-    String strScramblingBatchScrambleAccount = 'scramblingBatch.ScrambleAccount';
+    String BATCH_EXECUTE = 'scramblingBatch.execute';
+    String BATCH_FINISH = 'scramblingBatch.finish';
+    String NON_SETUP_OBJECTS = 'scramblingBatch.executeScramblingNonSetupObjects';
+    String SETUP_OBJECTS = 'scramblingBatch.executeScramblingSetupObjects';
+    String SCRAMBLE_ACCOUNT  = 'scramblingBatch.ScrambleAccount';
     
     public Boolean isUserBatch;
     
@@ -20,10 +20,10 @@ public class scramblingBatch implements Database.Batchable<SObject>,Database.sta
     }
 
     public Database.queryLocator start(Database.BatchableContext db) {
-        return !isUserBatch ? Database.getQueryLocator([select id,firstName,lastName,isactive__c,opt_out_yri__c,email,accountId,user__c
+        return !isUserBatch ? Database.getQueryLocator([select id, firstName, lastName, isactive__c, opt_out_yri__c, email, accountId, user__c
                                                         from contact 
-                                                        where opt_out_yri__c = 'requested']) : 
-        					  Database.getQueryLocator([select id,firstname,lastname,username,federationIdentifier,isactive 
+                                                        where opt_out_yri__c = :yashOrgCConstants.REQUESTED]) : 
+        					  Database.getQueryLocator([select id, firstname, lastname, username, federationIdentifier, isactive 
                                                         from user 
                                                         where id in :userIds]);
     }
@@ -38,7 +38,7 @@ public class scramblingBatch implements Database.Batchable<SObject>,Database.sta
             }
         }
         catch(Exception e) {
-            errorLog.createErrorLog(e,strScramblingBatchExecute);
+            errorLog.createErrorLog(e,BATCH_EXECUTE);
         }
     }
     
@@ -51,7 +51,7 @@ public class scramblingBatch implements Database.Batchable<SObject>,Database.sta
             }
         }
         catch(exception e) {
-            errorLog.createErrorLog(e, strScramblingBatchFinish);
+            errorLog.createErrorLog(e, BATCH_FINISH);
         }
     }
     
@@ -60,22 +60,34 @@ public class scramblingBatch implements Database.Batchable<SObject>,Database.sta
             Set<ID> accountIds = new Set<ID>();
             
             for(contact con : contactsToScramble) {
-                con.firstName = (con.firstName == null ? '' : con.firstName) + yashOrgCConstants.OPT_OUT;
-                con.lastName = (con.lastName == null ? '' : con.lastName) + yashOrgCConstants.OPT_OUT;
+                con.firstName = YashOrgC_Utility.appendSafe(con.firstName) + yashOrgCConstants.OPT_OUT;
+                con.lastName = YashOrgC_Utility.appendSafe(con.lastName) + yashOrgCConstants.OPT_OUT;
                 con.isactive__c = false;
                 con.opt_out_yri__c = 'opt out';
-                con.email = (con.email == null ? '' : con.email) + yashOrgCConstants.INVALID;
+                con.email = YashOrgC_Utility.appendSafe(con.email) + yashOrgCConstants.INVALID;
                 if(con.accountId != null) accountIds.add(con.accountID);
                 if(con.user__c != null) userIds.add(con.user__c);
             }
             
-            update contactsToScramble;        
+            if(!contactsToScramble.isEmpty()) {
+                Database.SaveResult[] scrambledContacts = Database.update(contactsToScramble, false);
+                
+                for(Database.SaveResult sr : scrambledContacts) {
+                    if(!sr.isSuccess()) {
+                        for(Database.error er : sr.getErrors()) {
+                            errorLog.createErrorLog(er.getMessage(), NON_SETUP_OBJECTS);
+                        }
+                    }
+                }
+            }
+            
+
             if(!accountIds.isEmpty()) {
                 scrambleAccount(accountIds);
             }
         }
         catch(exception e) {
-            errorLog.createErrorLog(e, strScramblingBatchexecuteScramblingNonSetupObjects);
+            errorLog.createErrorLog(e, NON_SETUP_OBJECTS);
         }
     }
     
@@ -84,14 +96,24 @@ public class scramblingBatch implements Database.Batchable<SObject>,Database.sta
             List<account> accountsToScramble = new List<account>();
             
             for(account ac : [select id,name from account where id in :accountIDs]) {
-                ac.name = (ac.name == null ? '' : ac.name) + yashOrgCConstants.OPT_OUT;
+                ac.name = YashOrgC_Utility.appendSafe(ac.name) + yashOrgCConstants.OPT_OUT;
                 accountsToScramble.add(ac);
             }
             
-            update accountsToScramble;
+            if(!accountsToScramble.isEmpty()) {
+                List<Database.SaveResult> scrambledAccounts = Database.update(accountsToScramble,false);
+
+                for(Database.saveResult sr : scrambledAccounts) {
+                    if(!sr.isSuccess()) {
+                        for(Database.error er : sr.getErrors()) {
+                            errorLog.createErrorLog(er.getMessage(), SCRAMBLE_ACCOUNT);
+                        }
+                    }
+                }
+            }
         }
         catch(Exception e) {
-            errorLog.createErrorLog(e, strScramblingBatchScrambleAccount);
+            errorLog.createErrorLog(e, SCRAMBLE_ACCOUNT);
         }
     }
 
@@ -101,20 +123,27 @@ public class scramblingBatch implements Database.Batchable<SObject>,Database.sta
             List<user> usersToScramble = new List<user>();
             
             for(user u : users) {
-                u.firstName = (u.firstName == null ? '' : u.firstName) + yashOrgCConstants.OPT_OUT;
-                u.lastName = (u.lastName == null ? '' : u.lastName) + yashOrgCConstants.OPT_OUT;
+                u.firstName = YashOrgC_Utility.appendSafe(u.firstName) + yashOrgCConstants.OPT_OUT;
+                u.lastName = YashOrgC_Utility.appendSafe(u.lastName) + yashOrgCConstants.OPT_OUT;
                 u.userName = u.userName + yashOrgCConstants.INVALID;
-                u.federationIdentifier = (u.federationIdentifier == null ? '' : u.federationIdentifier) + yashOrgCConstants.INVALID;
+                u.federationIdentifier = YashOrgC_Utility.appendSafe(u.federationIdentifier) + yashOrgCConstants.INVALID;
                 u.isactive = false;
                 usersToScramble.add(u);
             }
             
             if(!usersToScramble.isEmpty()) {
-                update usersToScramble;
+                List<Database.saveResult> scrambledUsers = Database.update(usersToScramble);
+                for(Database.saveResult sr : scrambledUsers) {
+                    if(!sr.isSuccess()) {
+                        for(Database.error er : sr.getErrors()) {
+                            errorLog.createErrorLog(er.getMessage(), SETUP_OBJECTS);
+                        }
+                    }
+                }
             }
         }
         catch(exception e) {
-            errorLog.createErrorLog(e, strScramblingBatchexecuteScramblingSetupObjects);
+            errorLog.createErrorLog(e, SETUP_OBJECTS);
         }
     }    
     
