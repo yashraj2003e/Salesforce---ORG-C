@@ -63,7 +63,7 @@ public class scramblingBatch implements Database.Batchable<SObject>,Database.sta
                 con.firstName = YashOrgC_Utility.appendSafe(con.firstName) + yashOrgCConstants.OPT_OUT;
                 con.lastName = YashOrgC_Utility.appendSafe(con.lastName) + yashOrgCConstants.OPT_OUT;
                 con.isactive__c = false;
-                con.opt_out_yri__c = 'opt out';
+                con.opt_out_yri__c = yashOrgCConstants.OPT_OUT;
                 con.email = YashOrgC_Utility.appendSafe(con.email) + yashOrgCConstants.INVALID;
                 if(con.accountId != null) accountIds.add(con.accountID);
                 if(con.user__c != null) userIds.add(con.user__c);
