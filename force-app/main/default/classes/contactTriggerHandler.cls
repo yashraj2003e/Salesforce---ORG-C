@@ -16,7 +16,7 @@ public class contactTriggerHandler {
         List<contact> updatedContacts = new List<contact>();
         for(contact customercontact : contacts) {
             String accountName = customercontact.FirstName + ' ' + customercontact.LastName;
-            account ac = new account(name = accountName,market__c = 'a01dL000020UisD');
+            account ac = new account(name = accountName,market__c = yashOrgCConstants.MARKET);
             accounts.add(ac);
         }
         
