@@ -36,5 +36,6 @@ jobs:
           sf project deploy start \
             --source-dir force-app/main/default/classes \
             --source-dir force-app/main/default/lwc \
+            --source-dir force-app/main/default/triggers \
             --target-org targetOrg \
             --wait 10
