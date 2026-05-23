@@ -42,9 +42,9 @@ private class AccountTriggerHandlerTest {
 
     System.Test.startTest();
 
-    acc.active__c = 'No';
+    ac.active__c = 'No';
 
-    Database.saveResult sr = Database.update(acc, false);
+    Database.saveResult sr = Database.update(ac, false);
 
     System.Test.stopTest();
 
