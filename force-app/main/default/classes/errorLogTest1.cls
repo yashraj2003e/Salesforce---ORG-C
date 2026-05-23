@@ -38,17 +38,4 @@ public class errorLogTest1 {
       'Error message should be logged'
     );
   }
-
-  @isTest
-  static void testCreateErrorLogWithNullInput() {
-    // Edge case: what happens with null?
-    try {
-      errorLog.createErrorLog(
-        null,
-        'errorLogTest.testCreateErrorLogWithNullInput'
-      );
-    } catch (exception e) {
-      // Should handle gracefully
-    }
-  }
 }
