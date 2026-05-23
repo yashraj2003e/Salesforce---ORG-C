@@ -24,7 +24,9 @@ public class contactTriggerHandler {
       accounts.add(ac);
     }
 
-    insert accounts;
+    if (!accounts.isEmpty()) {
+      insert accounts;
+    }
 
     List<ID> ids = new List<ID>();
     for (integer i = 0; i < contacts.size(); i++) {
@@ -40,7 +42,10 @@ public class contactTriggerHandler {
     ]) {
       System.debug(c1);
     }
-    update updatedContacts;
+
+    if (!updatedContacts.isEmpty()) {
+      update updatedContacts;
+    }
 
     System.enqueueJob(new createCustomerUser(contacts));
     syncContactUpdate(contacts);
