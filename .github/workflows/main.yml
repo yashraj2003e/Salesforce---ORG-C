@@ -26,9 +26,10 @@ jobs:
             --sfdx-url-file auth.txt \
             --alias targetOrg
 
-      - name: Deploy
+      - name: Deploy Apex + LWC
         run: |
           sf project deploy start \
-            --source-dir force-app \
+            --source-dir force-app/main/default/classes \
+            --source-dir force-app/main/default/lwc \
             --target-org targetOrg \
             --wait 10
