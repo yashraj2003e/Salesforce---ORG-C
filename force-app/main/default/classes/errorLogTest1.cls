@@ -20,7 +20,7 @@ public class errorLogTest1 {
     }
 
     // Assert error log was created
-    List<error_log__c> logs = [SELECT id, message__c FROM error_log__c];
+    List<error_log__c> logs = [SELECT id, Description__c FROM error_log__c];
     System.assert(!logs.isEmpty(), 'Error log should have been created');
   }
 
@@ -31,10 +31,10 @@ public class errorLogTest1 {
       'errorLogTest.testCreateErrorLogWithMessage'
     );
 
-    List<error_log__c> logs = [SELECT id, message__c FROM error_log__c];
+    List<error_log__c> logs = [SELECT id, Description__c FROM error_log__c];
     System.assert(!logs.isEmpty(), 'Error log should have been created');
     System.assert(
-      logs[0].message__c.contains('Test error message'),
+      logs[0].Description__c.contains('Test error message'),
       'Error message should be logged'
     );
   }
