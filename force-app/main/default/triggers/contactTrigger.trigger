@@ -5,7 +5,7 @@ trigger contactTrigger on Contact(before insert, after insert, after update) {
     }
     if (Trigger.isAfter) {
       contactTriggerHandler.handleContactInsert(Trigger.new);
-      contactTriggerHandler.syncContactUpdate(Trigger.new);
+      //   contactTriggerHandler.syncContactUpdate(Trigger.new);
     }
   } else if (Trigger.isUpdate) {
     if (Trigger.isAfter) {

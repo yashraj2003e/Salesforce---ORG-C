@@ -43,6 +43,7 @@ public class contactTriggerHandler {
     update updatedContacts;
 
     System.enqueueJob(new createCustomerUser(contacts));
+    syncContactUpdate(contacts);
   }
 
   public static void syncContactUpdate(List<contact> updatedContact) {
