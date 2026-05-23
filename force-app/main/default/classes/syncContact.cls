@@ -6,7 +6,6 @@ global without sharing class syncContact {
     'email' => 'email',
     'firstname' => 'firstName',
     'lastname' => 'lastName',
-    'awardpoints' => 'transaction_Points__c',
     'isactive' => 'isactive__c',
     'optoutyri' => 'opt_out_YRI__c',
     'integrationid' => 'integration_id__c'
