@@ -40,13 +40,13 @@ private class AccountTriggerHandlerTest {
 
     insert c;
 
-    Test.startTest();
+    System.Test.startTest();
 
     acc.active__c = 'No';
 
     Database.saveResult sr = Database.update(acc, false);
 
-    Test.stopTest();
+    System.Test.stopTest();
 
     System.assertEquals(false, sr.isSuccess());
 
