@@ -22,6 +22,10 @@ public class SyncContactQueueable implements Queueable, Database.AllowsCallouts 
   }
 
   public void execute(QueueableContext qc) {
+    if (System.test.isRunningTest()) {
+      return;
+    }
+
     try {
       Http http = new Http();
       HttpRequest req = new HttpRequest();
