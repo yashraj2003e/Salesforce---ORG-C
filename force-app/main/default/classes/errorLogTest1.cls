@@ -1,3 +1,4 @@
+@isTest
 public class errorLogTest1 {
   @isTest
   static void testCreateErrorLogWithException() {
