@@ -1,5 +1,5 @@
 @isTest
-public class errorLogTest {
+public class errorLogTest1 {
   @isTest
   static void testCreateErrorLogWithException() {
     try {
