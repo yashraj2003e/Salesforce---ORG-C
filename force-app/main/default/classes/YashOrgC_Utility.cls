@@ -5,4 +5,10 @@ public class YashOrgC_Utility {
         }
         return value;
     }
+
+
+    public static String addSpaceText(string value1,string value2) {
+        return value1 + ' ' + value2;
+    }
+
 }

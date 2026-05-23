@@ -17,6 +17,7 @@ export default class QuingForgotPassword extends LightningElement {
 
     handleUsernameChange(event) {
         this.username = event.target.value;
+        this.isPasswordReset = null;
     }
 
     async handleSubmit() {
