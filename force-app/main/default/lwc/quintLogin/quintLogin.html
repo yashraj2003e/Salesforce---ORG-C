@@ -1,7 +1,7 @@
 <template>
   <h1>LOGIN</h1>
-  <input type="text" onkeyup={handleUsernameChange} />
-  <input type="password" onkeyup={handlePasswordChange} />
+  <input type="text" onkeyup={handleCredentialChange} name="username" />
+  <input type="password" onkeyup={handleCredentialChange} name="password" />
   <button type="submit" onclick={handleSubmit}>Submit</button>
   <div>
     <h3 if:true={error}>{error}</h3>

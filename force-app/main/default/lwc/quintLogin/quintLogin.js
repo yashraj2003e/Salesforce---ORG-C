@@ -21,14 +21,25 @@ export default class QuintLogin extends LightningElement {
     }
   };
 
-  handleUsernameChange(event) {
-    this.username = event.target.value;
-    this.error = "";
-  }
+  handleCredentialChange(event) {
+    const value = event.target.value;
 
-  handlePasswordChange(event) {
-    this.password = event.target.value;
-    this.error = "";
+    switch (event.target.name) {
+      case "username":
+        this.username = value;
+        break;
+
+      case "password":
+        this.password = value;
+        break;
+
+      default:
+        break;
+    }
+
+    if (this.error && event.key !== "Enter") {
+      this.error = "";
+    }
   }
 
   get isFailed() {
