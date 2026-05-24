@@ -54,7 +54,11 @@ jobs:
 
       - name: Deploy Delta
         run: |
-          sf project deploy start \
-            --manifest delta/package/package.xml \
-            --target-org targetOrg \
-            --wait 10
+          if grep -q "<types>" delta/package/package.xml; then
+            sf project deploy start \
+              --manifest delta/package/package.xml \
+              --target-org targetOrg \
+              --wait 10
+          else
+            echo "No metadata changes to deploy."
+          fi
