@@ -18,24 +18,43 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: Install Salesforce CLI
         run: |
           npm install -g @salesforce/cli
 
+      - name: Install SGD Plugin
+        run: |
+          echo y | sf plugins install sfdx-git-delta
+
       - name: Authenticate Org
         run: |
           echo "${{ secrets.SFDX_AUTH_URL }}" > auth.txt
+
           sf org login sfdx-url \
             --sfdx-url-file auth.txt \
             --alias targetOrg
 
-      - name: Deploy Apex + LWC
+      - name: Generate Delta Package
+        run: |
+          mkdir delta
+
+          sf sgd source delta \
+            --to HEAD \
+            --from HEAD~1 \
+            --output-dir delta
+
+      - name: Check Package Exists
+        run: |
+          if [ ! -f delta/package/package.xml ]; then
+            echo "No package.xml generated"
+            exit 0
+          fi
+
+      - name: Deploy Delta
         run: |
           sf project deploy start \
-            --source-dir force-app/main/default/classes \
-            --source-dir force-app/main/default/lwc \
-            --source-dir force-app/main/default/triggers \
+            --manifest delta/package/package.xml \
             --target-org targetOrg \
             --wait 10
