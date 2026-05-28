@@ -19,6 +19,7 @@ public class contactTriggerHandler {
         customercontact.LastName;
       account ac = new account(
         name = accountName,
+        active__c = 'Yes',
         market__c = yashOrgCConstants.MARKET
       );
       accounts.add(ac);

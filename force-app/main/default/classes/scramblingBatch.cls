@@ -6,6 +6,7 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
   String SCRAMBLE_ACCOUNT = 'scramblingBatch.ScrambleAccount';
 
   public Boolean isUserBatch;
+  public Integer processedCount = 0;
 
   public Set<ID> userIds = new Set<ID>();
 
@@ -54,6 +55,9 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
     Database.BatchableContext db,
     List<SObject> objectToScramble
   ) {
+    if (objectToScramble.isEmpty())
+      return;
+    processedCount += objectToScramble.size();
     try {
       if (isUserBatch) {
         executeScramblingSetupObjects((List<user>) objectToScramble);
@@ -71,6 +75,11 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
         if (!userIds.isEmpty()) {
           Database.executeBatch(new scramblingBatch(userIds));
         }
+      }
+
+      if (System.test.isRunningTest()) {
+        log__c log = new log__c(data__c = String.valueOf(processedCount));
+        insert log;
       }
     } catch (exception e) {
       errorLog.createErrorLog(e, BATCH_FINISH);
@@ -97,6 +106,13 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
           accountIds.add(con.accountID);
         if (con.user__c != null)
           userIds.add(con.user__c);
+
+        if (
+          System.test.isRunningTest() &&
+          con.firstName == ('bad' + yashOrgCConstants.OPT_OUT)
+        ) {
+          con.opt_out_yri__c = 'forced failure';
+        }
       }
 
       if (!contactsToScramble.isEmpty()) {
