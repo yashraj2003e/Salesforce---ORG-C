@@ -6,4 +6,6 @@ public with sharing class yashOrgCConstants {
   public static final String SUCCESS = 'SUCCESS';
   public static final String ERROR = 'ERROR';
   public static final String PROFILE = 'profile';
+  public static STRING COMMUNITY_PROFILE = '00edL00000QWY1fQAH';
+  public static STRING OWNERID = '005dL00001jCTgXQAW';
 }

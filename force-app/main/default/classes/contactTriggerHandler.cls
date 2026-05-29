@@ -1,6 +1,31 @@
-public class contactTriggerHandler {
-  public static void addIntegrationId(List<contact> insertedContacts) {
-    for (contact con : insertedContacts) {
+public class contactTriggerHandler extends TriggerHandler {
+  Map<Id, Contact> oldMap;
+  Map<Id, Contact> newMap;
+  List<Contact> oldList;
+  List<Contact> newList;
+
+  public contactTriggerHandler() {
+    super('ContactTriggerHandler');
+    this.oldMap = (Map<Id, Contact>) Trigger.oldMap;
+    this.newMap = (Map<Id, Contact>) Trigger.newMap;
+    this.oldList = (List<Contact>) Trigger.old;
+    this.newList = (List<Contact>) Trigger.new;
+  }
+
+  public override void beforeInsert() {
+    addIntegrationId();
+  }
+
+  public override void afterInsert() {
+    handleContactInsert();
+  }
+
+  public override void afterUpdate() {
+    syncContactUpdate();
+  }
+
+  public void addIntegrationId() {
+    for (contact con : this.newList) {
       UUID integrationId = UUID.randomUUID();
       if (con.integration_id__c == null) {
         con.integration_id__c = String.valueOf(integrationId);
@@ -8,11 +33,11 @@ public class contactTriggerHandler {
     }
   }
 
-  public static void handleContactInsert(List<contact> contacts) {
+  public void handleContactInsert() {
     System.debug(UserInfo.getUserId());
     List<account> accounts = new List<account>();
     List<contact> updatedContacts = new List<contact>();
-    for (contact customercontact : contacts) {
+    for (contact customercontact : this.newList) {
       String accountName =
         customercontact.FirstName +
         ' ' +
@@ -30,9 +55,12 @@ public class contactTriggerHandler {
     }
 
     List<ID> ids = new List<ID>();
-    for (integer i = 0; i < contacts.size(); i++) {
-      contact c = new contact(Id = contacts[i].Id, accountId = accounts[i].id);
-      ids.add(contacts[i].id);
+    for (integer i = 0; i < this.newList.size(); i++) {
+      contact c = new contact(
+        Id = this.newList[i].Id,
+        accountId = accounts[i].id
+      );
+      ids.add(this.newList[i].id);
       updatedContacts.add(c);
     }
     System.debug(ids.size());
@@ -48,17 +76,17 @@ public class contactTriggerHandler {
       update updatedContacts;
     }
 
-    System.enqueueJob(new createCustomerUser(contacts));
-    syncContactUpdate(contacts);
+    System.enqueueJob(new createCustomerUser(this.newList));
+    syncContactUpdate();
   }
 
-  public static void syncContactUpdate(List<contact> updatedContact) {
+  public void syncContactUpdate() {
     List<contact> contactsToSync = new List<contact>();
     Boolean canSync = !FeatureManagement.checkPermission(
       'Data_Integration_User'
     );
     if (canSync) {
-      contactsToSync.addAll(updatedContact);
+      contactsToSync.addAll(this.newList);
     }
     if (!contactsToSync.isEmpty()) {
       System.enqueueJob(new syncContactQueueable(contactsToSync));

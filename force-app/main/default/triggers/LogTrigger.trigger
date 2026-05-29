@@ -1,10 +1,11 @@
-trigger acountTrigger on Account(
+trigger LogTrigger on Log__c(
   before insert,
   after insert,
   before update,
   after update,
   before delete,
+  after delete,
   after undelete
 ) {
-  new AccountTriggerHandler().run();
+  new LogTriggerHandler().run();
 }
