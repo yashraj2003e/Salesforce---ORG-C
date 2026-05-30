@@ -1,4 +1,4 @@
-public with sharing class LogTriggerHandler extends TriggerHandler {
+public without sharing class LogTriggerHandler extends TriggerHandler {
   public LogTriggerHandler() {
     super('LogTriggerHandler');
   }
@@ -7,15 +7,16 @@ public with sharing class LogTriggerHandler extends TriggerHandler {
   }
 
   public override void afterInsert() {
-    account ac = [
+    List<Account> ac = [
       SELECT id, active__c
       FROM account
       WHERE id = '001dL00002CYjZ3'
-      LIMIT 1
     ];
 
     TriggerHandler.byPass('AccountTriggerHandler');
-    ac.active__c = 'No';
+    for (account acc : ac) {
+      acc.active__c = 'No';
+    }
     update ac;
     TriggerHandler.clearByPass('AccountTriggerHandler');
   }

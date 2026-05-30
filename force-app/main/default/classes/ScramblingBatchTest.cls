@@ -70,10 +70,13 @@ private class ScramblingBatchTest {
     System.assert(scrambledContact.opt_out_YRI__c == yashOrgCConstants.OPT_OUT);
     System.assert(scrambledContact.isactive__c == false);
     System.assert(scrambledUser.isactive == false);
-    String userName = scrambledUser.name.substring(
-      scrambledUser.name.length() - 7
-    );
-    System.assertEquals(yashOrgCConstants.OPT_OUT, userName);
+    // String userName = scrambledUser.name.substring(
+    //   scrambledUser.name.length() - 7
+    // );
+    // System.assertEquals(yashOrgCConstants.OPT_OUT, userName);
+
+    Boolean userName = scrambledUser.name.startsWith('opt out');
+    System.assert(userName == true);
   }
 
   @isTest

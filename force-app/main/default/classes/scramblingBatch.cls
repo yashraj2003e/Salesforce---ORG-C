@@ -33,7 +33,9 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
               accountId,
               user__c
             FROM contact
-            WHERE opt_out_yri__c = :yashOrgCConstants.REQUESTED
+            WHERE
+              opt_out_yri__c = :yashOrgCConstants.REQUESTED
+              AND (NOT name LIKE 'opt%')
           ]
         )
       : Database.getQueryLocator(
@@ -46,7 +48,7 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
               federationIdentifier,
               isactive
             FROM user
-            WHERE id IN :userIds
+            WHERE id IN :userIds AND (NOT name LIKE 'opt%')
           ]
         );
   }
@@ -71,15 +73,14 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
 
   public void finish(Database.BatchableContext db) {
     try {
+      if (System.test.isRunningTest()) {
+        log__c log = new log__c(data__c = String.valueOf(processedCount));
+        insert log;
+      }
       if (!isUserBatch) {
         if (!userIds.isEmpty()) {
           Database.executeBatch(new scramblingBatch(userIds));
         }
-      }
-
-      if (System.test.isRunningTest()) {
-        log__c log = new log__c(data__c = String.valueOf(processedCount));
-        insert log;
       }
     } catch (exception e) {
       errorLog.createErrorLog(e, BATCH_FINISH);
@@ -94,10 +95,10 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
 
       for (contact con : contactsToScramble) {
         con.firstName =
-          YashOrgC_Utility.appendSafe(con.firstName) +
-          yashOrgCConstants.OPT_OUT;
+          yashOrgCConstants.OPT_OUT +
+          YashOrgC_Utility.appendSafe(con.firstName);
         con.lastName =
-          YashOrgC_Utility.appendSafe(con.lastName) + yashOrgCConstants.OPT_OUT;
+          yashOrgCConstants.OPT_OUT + YashOrgC_Utility.appendSafe(con.lastName);
         con.isactive__c = false;
         con.opt_out_yri__c = yashOrgCConstants.OPT_OUT;
         con.email =
@@ -109,7 +110,7 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
 
         if (
           System.test.isRunningTest() &&
-          con.firstName == ('bad' + yashOrgCConstants.OPT_OUT)
+          con.firstName == (yashOrgCConstants.OPT_OUT + 'bad')
         ) {
           con.opt_out_yri__c = 'forced failure';
         }
@@ -145,10 +146,10 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
       for (account ac : [
         SELECT id, name
         FROM account
-        WHERE id IN :accountIDs
+        WHERE (NOT name LIKE 'opt%') AND id IN :accountIDs
       ]) {
         ac.name =
-          YashOrgC_Utility.appendSafe(ac.name) + yashOrgCConstants.OPT_OUT;
+          yashOrgCConstants.OPT_OUT + YashOrgC_Utility.appendSafe(ac.name);
         accountsToScramble.add(ac);
       }
 
@@ -177,9 +178,9 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
 
       for (user u : users) {
         u.firstName =
-          YashOrgC_Utility.appendSafe(u.firstName) + yashOrgCConstants.OPT_OUT;
+          yashOrgCConstants.OPT_OUT + YashOrgC_Utility.appendSafe(u.firstName);
         u.lastName =
-          YashOrgC_Utility.appendSafe(u.lastName) + yashOrgCConstants.OPT_OUT;
+          yashOrgCConstants.OPT_OUT + YashOrgC_Utility.appendSafe(u.lastName);
         u.userName = u.userName + yashOrgCConstants.INVALID;
         u.federationIdentifier =
           YashOrgC_Utility.appendSafe(u.federationIdentifier) +
