@@ -19,36 +19,52 @@
 // }
 // Database.rollback(sp);
 
-ID apacU = [SELECT id FROM user WHERE lastName = 'APAC' LIMIT 1].id;
-ID amerU = [SELECT id FROM user WHERE lastName = 'AMER' LIMIT 1].id;
-ID emeaU = [SELECT id FROM user WHERE lastName = 'EMEA' LIMIT 1].id;
+// ID apacU = [SELECT id FROM user WHERE lastName = 'APAC' LIMIT 1].id;
+// ID amerU = [SELECT id FROM user WHERE lastName = 'AMER' LIMIT 1].id;
+// ID emeaU = [SELECT id FROM user WHERE lastName = 'EMEA' LIMIT 1].id;
 
-List<market__c> apac = [
-  SELECT id, ownerid
-  FROM market__c
-  WHERE region__c = 'APAC'
-];
-List<market__c> amer = [
-  SELECT id, ownerid
-  FROM market__c
-  WHERE region__c = 'AMER'
-];
-List<market__c> emea = [
-  SELECT id, ownerid
-  FROM market__c
-  WHERE region__c = 'EMEA'
-];
+// List<market__c> apac = [
+//   SELECT id, ownerid
+//   FROM market__c
+//   WHERE region__c = 'APAC'
+// ];
+// List<market__c> amer = [
+//   SELECT id, ownerid
+//   FROM market__c
+//   WHERE region__c = 'AMER'
+// ];
+// List<market__c> emea = [
+//   SELECT id, ownerid
+//   FROM market__c
+//   WHERE region__c = 'EMEA'
+// ];
 
-for (market__c m : apac) {
-  m.ownerid = apacU;
-}
-for (market__c m : amer) {
-  m.ownerid = amerU;
-}
-for (market__c m : emea) {
-  m.ownerid = emeaU;
-}
+// for (market__c m : apac) {
+//   m.ownerid = apacU;
+// }
+// for (market__c m : amer) {
+//   m.ownerid = amerU;
+// }
+// for (market__c m : emea) {
+//   m.ownerid = emeaU;
+// }
 
-update apac;
-update amer;
-update emea;
+// update apac;
+// update amer;
+// update emea;
+
+public Integer deactivationDays = 5;
+DateTime deactivationDate = System.now().addDays(-deactivationDays);
+List<User> users = [
+  SELECT id
+  FROM User
+  WHERE
+    profile.userLicense.name IN (
+      'Customer Community',
+      'Customer Community plus'
+    )
+    AND (lastlogindate < :deactivationDate
+    OR (lastlogindate = NULL
+    AND createddate < :deactivationDate))
+];
+System.debug(users);
