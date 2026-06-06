@@ -1,0 +1,17 @@
+<aura:component
+  implements="forceCommunity:availableForAllPageTypes"
+  access="global"
+>
+  <aura:attribute name="addToHomeScreenPrompt" type="Object" />
+
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+  <lightning:button
+    label="Show Install Prompt"
+    onclick="
+      {
+        !c.showPrompt;
+      }
+    "
+  />
+</aura:component>

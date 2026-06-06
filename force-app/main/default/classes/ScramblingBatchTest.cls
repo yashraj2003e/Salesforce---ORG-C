@@ -169,4 +169,34 @@ private class ScramblingBatchTest {
       log.method__c
     );
   }
+
+  @isTest
+  static void twiceScramblingTest() {
+    contact c = new contact(
+      FirstName = 'opt outfirstName',
+      LastName = 'lastName',
+      email = 'firstLast@gmail.com',
+      opt_out_yri__c = 'requested'
+    );
+
+    insert c;
+
+    System.Test.startTest();
+    Database.executeBatch(new scramblingBatch());
+    System.Test.stopTest();
+
+    contact scrambledContact = [
+      SELECT id, firstName, lastName, opt_out_yri__c
+      FROM contact
+      WHERE id = :c.id
+      LIMIT 1
+    ];
+
+    System.assertEquals(
+      yashOrgCConstants.REQUESTED,
+      scrambledContact.opt_out_yri__c
+    );
+
+    System.assertEquals('opt outfirstName', scrambledContact.FirstName);
+  }
 }

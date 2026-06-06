@@ -38,38 +38,35 @@ public class contactTriggerHandler extends TriggerHandler {
     List<account> accounts = new List<account>();
     List<contact> updatedContacts = new List<contact>();
     for (contact customercontact : this.newList) {
-      String accountName =
-        customercontact.FirstName +
-        ' ' +
-        customercontact.LastName;
+      String accountName = YashOrgC_Utility.addSpaceText(
+        customercontact.FirstName,
+        customercontact.LastName
+      );
+
+      Integer randomMarket = YashOrgC_Utility.getRandomNumber();
+
       account ac = new account(
         name = accountName,
-        active__c = 'Yes',
-        market__c = yashOrgCConstants.MARKET
+        market__c = yashOrgCConstants.marketIds[randomMarket]
       );
+
       accounts.add(ac);
     }
 
     if (!accounts.isEmpty()) {
       insert accounts;
+      updateAccountOwner(accounts);
     }
 
     List<ID> ids = new List<ID>();
     for (integer i = 0; i < this.newList.size(); i++) {
       contact c = new contact(
         Id = this.newList[i].Id,
-        accountId = accounts[i].id
+        accountId = accounts[i].id,
+        ownerId = accounts[i].ownerId
       );
       ids.add(this.newList[i].id);
       updatedContacts.add(c);
-    }
-    System.debug(ids.size());
-    for (contact c1 : [
-      SELECT id, integration_id__c
-      FROM contact
-      WHERE id IN :ids
-    ]) {
-      System.debug(c1);
     }
 
     if (!updatedContacts.isEmpty()) {
@@ -78,6 +75,34 @@ public class contactTriggerHandler extends TriggerHandler {
 
     System.enqueueJob(new createCustomerUser(this.newList));
     syncContactUpdate();
+  }
+
+  public void updateAccountOwner(List<Account> accounts) {
+    Set<Id> marketIds = new Set<Id>();
+
+    for (Account acc : accounts) {
+      if (acc.Market__c != null) {
+        marketIds.add(acc.Market__c);
+      }
+    }
+
+    Map<Id, Market__c> marketMap = new Map<Id, Market__c>(
+      [
+        SELECT Id, OwnerId
+        FROM Market__c
+        WHERE Id IN :marketIds
+      ]
+    );
+
+    for (Account acc : accounts) {
+      Market__c market = marketMap.get(acc.Market__c);
+
+      if (market != null) {
+        acc.OwnerId = market.OwnerId;
+      }
+    }
+
+    update accounts;
   }
 
   public void syncContactUpdate() {
