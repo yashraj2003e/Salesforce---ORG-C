@@ -47,7 +47,8 @@ public class contactTriggerHandler extends TriggerHandler {
 
       account ac = new account(
         name = accountName,
-        market__c = yashOrgCConstants.marketIds[randomMarket]
+        market__c = yashOrgCConstants.marketIds[randomMarket],
+        ownerId = userInfo.getUserId()
       );
 
       accounts.add(ac);
@@ -57,7 +58,7 @@ public class contactTriggerHandler extends TriggerHandler {
       insert accounts;
       updateAccountOwner(accounts);
     }
-
+    System.debug(accounts);
     List<ID> ids = new List<ID>();
     for (integer i = 0; i < this.newList.size(); i++) {
       contact c = new contact(

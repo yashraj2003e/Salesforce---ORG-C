@@ -1,26 +1,31 @@
-public without sharing class UserDeactivationBatch implements Database.Batchable, Database<SObject>, Database.stateful {
+public without sharing class UserDeactivationBatch implements Database.Batchable<SObject>, Database.stateful {
   public static final String DEACTIVE_USER = 'UserDeactivationBatch.deactivateSetupObject';
+  public static final String DEACTIVATE_USER = 'UserDeactivationBatch.deactivateSetupObject';
+  public static final String DEACTIVATE_CONTACT = 'UserDeactivationBatch.deactivateNonSetupObject';
 
   public static Decimal deactivationDays = yashorgc_config__mdt.getInstance(
       'user_deactivation_days'
     )
     .user_deactivation__c;
-
-  DateTime deactivationDate = dateTime.newInstance(
-    deactivationDate,
-    Time.newInstance(0, 0, 0, 0)
-  );
-
-  public Boolean isContactBatch = false;
-
+  //   DateTime deactivationDate = dateTime.newInstance(
+  //     deactivationDays,
+  //     Time.newInstance(0, 0, 0, 0)
+  //   );
+  DateTime deactivationDate = System.now()
+    .addDays(-Integer.valueOf(deactivationDays));
+  public Boolean isContactBatch;
   List<ID> contactIds = new List<ID>();
+
+  public UserDeactivationBatch() {
+    isContactBatch = false;
+  }
 
   public UserDeactivationBatch(List<ID> contactIds) {
     this.isContactBatch = true;
     this.contactIds = contactIds;
   }
 
-  public static Database.QueryLocator start(Database.BatchableContext bc) {
+  public Database.QueryLocator start(Database.BatchableContext bc) {
     if (!isContactBatch) {
       return Database.getQueryLocator(
         [
@@ -43,11 +48,11 @@ public without sharing class UserDeactivationBatch implements Database.Batchable
     }
   }
 
-  public static void execute(Database.BatchableContext bc, List<SObject> data) {
+  public void execute(Database.BatchableContext bc, List<SObject> data) {
     if (isContactBatch) {
-      deactiveNonSetupObject((List<Contact>) contactIds);
+      deactiveNonSetupObject((List<Id>) contactIds);
     } else {
-      deactivateSetupObject((List<User>) usersToDeactivate);
+      deactivateSetupObject((List<User>) data);
     }
   }
 
@@ -57,23 +62,29 @@ public without sharing class UserDeactivationBatch implements Database.Batchable
       contactIds.add(currentUser.contactId);
     }
 
-    if (!usersToDeactivate) {
+    if (!usersToDeactivate.isEmpty()) {
       List<Database.saveResult> result = Database.update(
         usersToDeactivate,
         false
       );
 
-      for (Databse.saveResult currentResult : result) {
+      for (Database.saveResult currentResult : result) {
         if (!currentResult.isSuccess()) {
           for (Database.error errors : currentResult.getErrors()) {
-            errorLog.createErrorLog(er.getMessage(), DEACTIVE_USER);
+            errorLog.createErrorLog(errors.getMessage(), DEACTIVATE_USER);
           }
         }
       }
     }
   }
 
-  public void deactiveNonSetupObject(List<Contact> contactsToDeactivate) {
+  public void deactiveNonSetupObject(List<Id> contactIds) {
+    List<contact> contactsToDeactivate = [
+      SELECT id, isactive__c
+      FROM contact
+      WHERE id IN :contactIds
+    ];
+
     for (contact currentContact : contactsToDeactivate) {
       currentContact.isactive__c = false;
     }
@@ -83,13 +94,13 @@ public without sharing class UserDeactivationBatch implements Database.Batchable
     for (Database.SaveResult result : results) {
       if (!result.isSuccess()) {
         for (Database.Error error : result.getErrors()) {
-          errorLog.createErrorLog(er.getMessage(), DEACTIVE_USER);
+          errorLog.createErrorLog(error.getMessage(), DEACTIVATE_CONTACT);
         }
       }
     }
   }
 
-  public static void finish(Database.Batchable bc) {
+  public void finish(Database.BatchableContext bc) {
     if (!isContactBatch) {
       Database.executeBatch(new UserDeactivationBatch(contactIds));
     }

@@ -20,31 +20,76 @@
  * See the Apex Language Reference for more information about Testing and Code Coverage.
  */
 @isTest
-private class UserDeactivationBatchTest {
+private class UserDeactivationBatchTest extends TriggerHandler {
+  public UserDeactivationBatchTest() {
+    super('UserDeactivationBatchTest');
+  }
+
   @isTest
   static void deactivationTest() {
+    TriggerHandler.byPass('ContactTriggerHandler');
+
     Contact c = new Contact(
-      FirstName = 'batch',
-      LastName = 'test',
+      FirstName = 'bat13c123h',
+      LastName = 'te11323st',
       isactive__c = true,
-      email = 'batchttesttt@gmail.com'
+      email = 'batcht13testt123t@gmail.com',
+      ownerId = '005dL00001lobvFQAQ'
     );
+
+    // missing: [Username, LastName, Email, Alias, TimeZoneSidKey, LocaleSidKey, EmailEncodingKey, ProfileId, LanguageLocaleKey
 
     insert c;
 
-    List<User> u = [SELECT id, isactive FROM user WHERE contactId = :c.id];
+    account ac = new account(
+      name = 'testacc',
+      market__c = 'a01dL00002Ciy1RQAR',
+      ownerId = '005dL00001lobvFQAQ'
+    );
 
-    User curUser;
+    insert ac;
 
-    if (!u.isEmpty()) {
-      curUser = u[0];
-    }
+    c.accountId = ac.Id;
+    update c;
+
+    System.debug(userInfo.getUserId());
+
+    User u = new User(
+      firstName = 'ba13tc123h',
+      lastName = 'te11323st',
+      email = 'batc12133hh@gmail.com',
+      username = 'c11323hh@gmail.com',
+      alias = 'bcc',
+      isactive = true,
+      timezonesidkey = 'Asia/Kolkata',
+      LocaleSidKey = 'en_US',
+      EmailEncodingKey = 'UTF-8',
+      ProfileId = '00edL00000QWY1fQAH',
+      LanguageLocaleKey = 'en_US',
+      contactId = c.id
+    );
+
+    insert u;
+
+    System.Test.setCreatedDate(u.id, System.now().addDays(-6));
 
     System.Test.startTest();
     Database.executeBatch(new UserDeactivationBatch());
     System.Test.stopTest();
 
-    System.assertEquals(false, curUser.isactive);
-    System.assertEquals(false, c.isactive__c);
+    User updatedUser = [
+      SELECT id, isactive, createddate
+      FROM user
+      WHERE id = :u.id
+    ];
+    Contact updatedContact = [
+      SELECT id, isactive__c
+      FROM contact
+      WHERE id = :c.id
+    ];
+    System.assertEquals(false, updatedUser.isactive);
+    System.assertEquals(false, updatedContact.isactive__c);
+
+    TriggerHandler.clearAllByPass();
   }
 }
