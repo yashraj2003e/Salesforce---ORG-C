@@ -1,0 +1,20 @@
+{
+  "access_token": "00DdL00000rdRZh!AQEAQLxmpuTGjcZebgEM39Vi3if6GYv.pCFmEgM6aHtuvdQuzP0AlQQ813uxZ8YPvZnokmvTIh1LMiPDvsZFPyd1TjT_0S09",
+  "signature": "1dxMM1zOsXfFFo5889xGKaUwsYhyN2PPRPEQV9v71iI=",
+  "scope": "api",
+  "instance_url": "https://yashorgc-dev-ed.develop.my.salesforce.com",
+  "id": "https://login.salesforce.com/id/00DdL00000rdRZhUAM/005dL00001jCTgXQAW",
+  "token_type": "Bearer",
+  "issued_at": "1781389689656"
+}
+
+
+curl -X POST https://yashorgc-dev-ed.develop.my.salesforce.com/services/oauth2/token -d "grant_type=client_credentials" -d "client_id=3MVG9GCMQoQ6rpzRhgoX75GjnEbHEV6ItjbVyyzg2cEq9MV8MajPs9SDX645GyxkLy7oUK4io.x0AjdjXTntu" -d "client_secret=1D0E0D14B4D39E774EB269D73509E3E68C3A3E944C228CB7FF894CB3FEED8EC5"
+
+curl -X POST \
+https://login.salesforce.com/services/oauth2/token \
+-d "grant_type=password" \
+-d "client_id=3MVG9GCMQoQ6rpzRhgoX75GjnEbHEV6ItjbVyyzg2cEq9MV8MajPs9SDX645GyxkLy7oUK4io.x0AjdjXTntu" \
+-d "client_secret=1D0E0D14B4D39E774EB269D73509E3E68C3A3E944C228CB7FF894CB3FEED8EC5" \
+-d "username=yashorgc@agentforce.com" \
+-d "password=AKANKSHA@20030516KOZj7cQxPDvoG4WrKHeT2aPUv"

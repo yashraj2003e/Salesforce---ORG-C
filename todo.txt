@@ -1,5 +1,0 @@
-!TODO -> 29/5/2026
--> add a territory logic -> when an account is added to a territory, the territory name should be added to account's profile
--> learn the business use of territory
--> types of roles -> territory based, hierarchy based etc
--> learn from -> dte_accountTriggerHandler on techniques used

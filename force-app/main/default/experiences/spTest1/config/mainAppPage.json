@@ -1,0 +1,11 @@
+{
+  "cmsSettings" : { },
+  "currentThemeId" : "04e9ac54-427d-48ab-9d21-c7e68fbcc58b",
+  "headMarkup" : "<script> window.addEventListener('beforeinstallprompt', function(e) { console.log('beforeinstallprompt fired'); e.preventDefault(); window.deferredPrompt = e; document.dispatchEvent( new CustomEvent('f4ath', { detail: e }) ); }); </script>\n<link rel=\"manifest\" href=\"/s/manifest.webmanifest\">",
+  "id" : "e8665427-f38c-4ac3-a840-f10ceaa04c55",
+  "isLockerServiceEnabled" : true,
+  "isRelaxedCSPLevel" : false,
+  "label" : "main",
+  "templateName" : "Service Community Template",
+  "type" : "appPage"
+}

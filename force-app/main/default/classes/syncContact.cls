@@ -66,11 +66,22 @@ global without sharing class syncContact {
         }
       }
 
-      if (!contactsToInsert.isEmpty()) {
-        insert contactsToInsert;
-      } else {
-        update contactsToUpdate;
+      // if (!contactsToInsert.isEmpty()) {
+      //   insert contactsToInsert;
+      // } else {
+      //   update contactsToUpdate;
+      // }
+
+
+      if(!contactsToInsert.isEmpty()) {
+        List<Database.SaveResult> insertResult = Database.insert(contactsToInsert);
       }
+
+
+      if(!contactsToUpdate.isEmpty()) {
+        List<Database.saveResult> updateResult = Database.update(contactsToUpdate);
+      }
+
     } catch (Exception e) {
       errorLog.createErrorLog(e, syncContactsyncContactMethod);
       throw e;
