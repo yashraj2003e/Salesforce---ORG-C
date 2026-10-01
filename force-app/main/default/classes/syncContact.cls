@@ -58,7 +58,10 @@ global without sharing class syncContact {
         System.debug(c);
         System.debug(dtoMap);
         System.debug(sourceContactIdMap);
-        if (sourceContactIdMap.containsKey(dto.integrationid)) {
+        if (
+          sourceContactIdMap.containsKey(dto.integrationid) &&
+          dto.integrationid != null
+        ) {
           c.id = (ID) sourceContactIdMap.get(dto.integrationid);
           contactsToUpdate.add(c);
         } else {
@@ -66,22 +69,11 @@ global without sharing class syncContact {
         }
       }
 
-      // if (!contactsToInsert.isEmpty()) {
-      //   insert contactsToInsert;
-      // } else {
-      //   update contactsToUpdate;
-      // }
-
-
-      if(!contactsToInsert.isEmpty()) {
-        List<Database.SaveResult> insertResult = Database.insert(contactsToInsert);
+      if (!contactsToInsert.isEmpty()) {
+        insert contactsToInsert;
+      } else {
+        update contactsToUpdate;
       }
-
-
-      if(!contactsToUpdate.isEmpty()) {
-        List<Database.saveResult> updateResult = Database.update(contactsToUpdate);
-      }
-
     } catch (Exception e) {
       errorLog.createErrorLog(e, syncContactsyncContactMethod);
       throw e;

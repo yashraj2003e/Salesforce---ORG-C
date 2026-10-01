@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cannot_Modify_Region</fullName>
+    <active>true</active>
+    <description
+  >Any user except System administrator cannot modify a Market&apos;s Region</description>
+    <errorConditionFormula>AND(
+NOT($Profile.Name = &apos;System Administrator&apos;),
+ISCHANGED(Region__c)
+)</errorConditionFormula>
+    <errorMessage>A Market&apos;s Region cannot be updated</errorMessage>
+</ValidationRule>

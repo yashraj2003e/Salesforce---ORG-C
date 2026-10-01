@@ -1,0 +1,12 @@
+{
+  "activeViewId": "1214a866-21ab-48f5-b375-56e0b22d927c",
+  "appPageId": "e8665427-f38c-4ac3-a840-f10ceaa04c55",
+  "configurationTags": [],
+  "devName": "customLabel__c",
+  "id": "01de47cf-80cb-44e6-ab62-c1bcd6de00b8",
+  "label": "customLabel",
+  "pageAccess": "UseParent",
+  "routeType": "custom-customlabel",
+  "type": "route",
+  "urlPrefix": "customlabel"
+}

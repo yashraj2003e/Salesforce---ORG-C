@@ -1,0 +1,81 @@
+{
+  "appPageId": "e8665427-f38c-4ac3-a840-f10ceaa04c55",
+  "componentName": "siteforce:dynamicLayout",
+  "dataProviders": [],
+  "id": "1214a866-21ab-48f5-b375-56e0b22d927c",
+  "label": "customLabel",
+  "regions": [
+    {
+      "components": [
+        {
+          "componentAttributes": {
+            "background": "background: rgba(0,0,0,0)",
+            "backgroundOverlay": "rgba(0,0,0,0.5)",
+            "contentAreaWidth": 100,
+            "sectionConfig": {
+              "UUID": "297e3189-87b5-458a-a51a-36a57cf892ca",
+              "columns": [
+                {
+                  "UUID": "5ce571d3-1b7f-49b6-bc02-d6eda6199feb",
+                  "columnKey": "1",
+                  "columnName": "Column 1",
+                  "columnWidth": "12",
+                  "seedComponents": []
+                }
+              ]
+            },
+            "sectionHeight": 300
+          },
+          "componentName": "forceCommunity:section",
+          "id": "297e3189-87b5-458a-a51a-36a57cf892ca",
+          "regions": [
+            {
+              "components": [
+                {
+                  "componentAttributes": {},
+                  "componentName": "c:customLabelTest",
+                  "id": "6ee1cf28-d35e-4efe-a61d-fdcc039b09b3",
+                  "renderPriority": "NEUTRAL",
+                  "renditionMap": {},
+                  "type": "component"
+                }
+              ],
+              "id": "5ce571d3-1b7f-49b6-bc02-d6eda6199feb",
+              "regionLabel": "Column 1",
+              "regionName": "1",
+              "renditionMap": {},
+              "type": "region"
+            }
+          ],
+          "renderPriority": "NEUTRAL",
+          "renditionMap": {},
+          "type": "component"
+        }
+      ],
+      "id": "775d63e7-28bc-46c2-b50f-4e43a16132ce",
+      "regionName": "content",
+      "type": "region"
+    },
+    {
+      "components": [
+        {
+          "componentAttributes": {
+            "customHeadTags": "",
+            "description": "",
+            "title": "customLabel"
+          },
+          "componentName": "forceCommunity:seoAssistant",
+          "id": "bbc78791-467b-4210-aa6a-c5c1e7342b2b",
+          "renditionMap": {},
+          "type": "component"
+        }
+      ],
+      "id": "904ce417-d59b-4567-b07c-5f0ec776788e",
+      "regionName": "sfdcHiddenRegion",
+      "type": "region"
+    }
+  ],
+  "themeLayoutType": "Inner",
+  "type": "view",
+  "viewType": "custom-customlabel"
+}

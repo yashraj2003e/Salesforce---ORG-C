@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <AddressSettings xmlns="http://soap.sforce.com/2006/04/metadata">
     <countriesAndStates>
         <countries>
@@ -109,7 +109,8 @@
             <standard>true</standard>
             <states>
                 <active>true</active>
-                <integrationValue>Australian Capital Territory</integrationValue>
+                <integrationValue
+        >Australian Capital Territory</integrationValue>
                 <isoCode>ACT</isoCode>
                 <label>Australian Capital Territory</label>
                 <standard>true</standard>
@@ -319,7 +320,8 @@
         </countries>
         <countries>
             <active>true</active>
-            <integrationValue>Bonaire, Sint Eustatius and Saba</integrationValue>
+            <integrationValue
+      >Bonaire, Sint Eustatius and Saba</integrationValue>
             <isoCode>BQ</isoCode>
             <label>Bonaire, Sint Eustatius and Saba</label>
             <orgDefault>false</orgDefault>
@@ -729,7 +731,8 @@
         </countries>
         <countries>
             <active>true</active>
-            <integrationValue>Congo, the Democratic Republic of the</integrationValue>
+            <integrationValue
+      >Congo, the Democratic Republic of the</integrationValue>
             <isoCode>CD</isoCode>
             <label>Congo, the Democratic Republic of the</label>
             <orgDefault>false</orgDefault>
@@ -1433,7 +1436,8 @@
         </countries>
         <countries>
             <active>true</active>
-            <integrationValue>South Georgia and the South Sandwich Islands</integrationValue>
+            <integrationValue
+      >South Georgia and the South Sandwich Islands</integrationValue>
             <isoCode>GS</isoCode>
             <label>South Georgia and the South Sandwich Islands</label>
             <orgDefault>false</orgDefault>
@@ -1469,7 +1473,8 @@
         </countries>
         <countries>
             <active>true</active>
-            <integrationValue>Heard Island and McDonald Islands</integrationValue>
+            <integrationValue
+      >Heard Island and McDonald Islands</integrationValue>
             <isoCode>HM</isoCode>
             <label>Heard Island and McDonald Islands</label>
             <orgDefault>false</orgDefault>
@@ -3473,7 +3478,8 @@
         </countries>
         <countries>
             <active>true</active>
-            <integrationValue>Lao People&apos;s Democratic Republic</integrationValue>
+            <integrationValue
+      >Lao People&apos;s Democratic Republic</integrationValue>
             <isoCode>LA</isoCode>
             <label>Lao People&apos;s Democratic Republic</label>
             <orgDefault>false</orgDefault>
@@ -4341,7 +4347,8 @@
         </countries>
         <countries>
             <active>true</active>
-            <integrationValue>Saint Helena, Ascension and Tristan da Cunha</integrationValue>
+            <integrationValue
+      >Saint Helena, Ascension and Tristan da Cunha</integrationValue>
             <isoCode>SH</isoCode>
             <label>Saint Helena, Ascension and Tristan da Cunha</label>
             <orgDefault>false</orgDefault>
@@ -4503,7 +4510,7 @@
         </countries>
         <countries>
             <active>true</active>
-            <integrationValue>Thailand</integrationValue>
+            <integrationValue>TH</integrationValue>
             <isoCode>TH</isoCode>
             <label>Thailand</label>
             <orgDefault>false</orgDefault>
@@ -5068,7 +5075,8 @@
             </states>
             <states>
                 <active>false</active>
-                <integrationValue>United States Minor Outlying Islands</integrationValue>
+                <integrationValue
+        >United States Minor Outlying Islands</integrationValue>
                 <isoCode>UM</isoCode>
                 <label>United States Minor Outlying Islands</label>
                 <standard>true</standard>
@@ -5169,7 +5177,8 @@
         </countries>
         <countries>
             <active>true</active>
-            <integrationValue>Saint Vincent and the Grenadines</integrationValue>
+            <integrationValue
+      >Saint Vincent and the Grenadines</integrationValue>
             <isoCode>VC</isoCode>
             <label>Saint Vincent and the Grenadines</label>
             <orgDefault>false</orgDefault>
@@ -5178,7 +5187,8 @@
         </countries>
         <countries>
             <active>true</active>
-            <integrationValue>Venezuela, Bolivarian Republic of</integrationValue>
+            <integrationValue
+      >Venezuela, Bolivarian Republic of</integrationValue>
             <isoCode>VE</isoCode>
             <label>Venezuela, Bolivarian Republic of</label>
             <orgDefault>false</orgDefault>

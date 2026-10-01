@@ -1,3 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata"/>
-
+<?xml version="1.0" encoding="UTF-8" ?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Technical_User_Sharing_AMER</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Technical User Sharing AMER</label>
+        <sharedTo>
+            <roleAndSubordinates>AMER</roleAndSubordinates>
+        </sharedTo>
+        <criteriaItems>
+            <field>Region__c</field>
+            <operation>equals</operation>
+            <value>AMER</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Technical_User_Sharing_APAC</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Technical User Sharing APAC</label>
+        <sharedTo>
+            <roleAndSubordinates>APAC</roleAndSubordinates>
+        </sharedTo>
+        <criteriaItems>
+            <field>Region__c</field>
+            <operation>equals</operation>
+            <value>APAC</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Technical_User_Sharing_EMEA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Technical User Sharing EMEA</label>
+        <sharedTo>
+            <roleAndSubordinates>EMEA</roleAndSubordinates>
+        </sharedTo>
+        <criteriaItems>
+            <field>Region__c</field>
+            <operation>equals</operation>
+            <value>EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

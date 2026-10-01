@@ -1,9 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Translations xmlns="http://soap.sforce.com/2006/04/metadata">
     <customApplications>
         <label><!-- Yashraj Industries --></label>
         <name>Yashraj_Industries</name>
     </customApplications>
+    <customLabels>
+        <label><!-- continue --></label>
+        <name>continue</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- test --></label>
+        <name>test</name>
+    </customLabels>
     <flowDefinitions>
         <flows>
             <customErrorMessages>
@@ -90,7 +98,8 @@
         <name>SendEmail</name>
     </quickActions>
     <reportTypes>
-        <description><!-- Partner Fund Requests and Partner Fund C --></description>
+        <description
+    ><!-- Partner Fund Requests and Partner Fund C --></description>
         <label><!-- Partner Fund Requests and Partner Fund C --></label>
         <name>MDF_Claim_Request_Crt</name>
         <sections>
@@ -103,7 +112,8 @@
         </sections>
     </reportTypes>
     <reportTypes>
-        <description><!-- Program Progress Summer &apos;24 (Partners) --></description>
+        <description
+    ><!-- Program Progress Summer &apos;24 (Partners) --></description>
         <label><!-- Program Progress Summer &apos;24 (Partners) --></label>
         <name>PRM_Program_Progress_sfdcSESv61</name>
         <sections>
@@ -160,7 +170,8 @@
         </sections>
     </reportTypes>
     <reportTypes>
-        <description><!-- Program Item Progress Summer &apos;24 (Partners) --></description>
+        <description
+    ><!-- Program Item Progress Summer &apos;24 (Partners) --></description>
         <label><!-- Program Item Progress Summer &apos;24 (Partners) --></label>
         <name>PRM_Program_Task_Progress_sfdcSESv61</name>
         <sections>
@@ -437,7 +448,8 @@
         </sections>
     </reportTypes>
     <reportTypes>
-        <description><!-- Program Item Progress Spring &apos;24 --></description>
+        <description
+    ><!-- Program Item Progress Spring &apos;24 --></description>
         <label><!-- Program Item Progress Spring &apos;24 --></label>
         <name>Program_Task_Progress_sfdcSESv60</name>
         <sections>
@@ -526,7 +538,8 @@
         </sections>
     </reportTypes>
     <reportTypes>
-        <description><!-- Program Item Progress Summer &apos;24 --></description>
+        <description
+    ><!-- Program Item Progress Summer &apos;24 --></description>
         <label><!-- Program Item Progress Summer &apos;24 --></label>
         <name>Program_Task_Progress_sfdcSESv61</name>
         <sections>
@@ -615,7 +628,8 @@
         </sections>
     </reportTypes>
     <reportTypes>
-        <description><!-- Orchestration Run Logs Spring &apos;24 --></description>
+        <description
+    ><!-- Orchestration Run Logs Spring &apos;24 --></description>
         <label><!-- Orchestration Run Logs Spring &apos;24 --></label>
         <name>flow_orchestration_log_ootb_crt_two_four_eight</name>
         <sections>
@@ -633,7 +647,8 @@
         </sections>
     </reportTypes>
     <reportTypes>
-        <description><!-- Orchestration Stage Runs Spring &apos;24 --></description>
+        <description
+    ><!-- Orchestration Stage Runs Spring &apos;24 --></description>
         <label><!-- Orchestration Stage Runs Spring &apos;24 --></label>
         <name>flow_orchestration_stage_run_ootb_crt_two_four_eight</name>
         <sections>
@@ -642,7 +657,8 @@
         </sections>
     </reportTypes>
     <reportTypes>
-        <description><!-- Orchestration Step Runs Spring &apos;24 --></description>
+        <description
+    ><!-- Orchestration Step Runs Spring &apos;24 --></description>
         <label><!-- Orchestration Step Runs Spring &apos;24 --></label>
         <name>flow_orchestration_step_run_ootb_crt_two_four_eight</name>
         <sections>
@@ -651,7 +667,8 @@
         </sections>
     </reportTypes>
     <reportTypes>
-        <description><!-- Orchestration Work Items Spring &apos;24 --></description>
+        <description
+    ><!-- Orchestration Work Items Spring &apos;24 --></description>
         <label><!-- Orchestration Work Items Spring &apos;24 --></label>
         <name>flow_orchestration_work_item_ootb_crt_two_four_eight</name>
         <sections>
@@ -702,7 +719,8 @@
         </sections>
     </reportTypes>
     <reportTypes>
-        <description><!-- Login History for Experience Cloud Site --></description>
+        <description
+    ><!-- Login History for Experience Cloud Site --></description>
         <label><!-- Login History for Experience Cloud Site --></label>
         <name>prm_total_portal_login_crt</name>
         <sections>

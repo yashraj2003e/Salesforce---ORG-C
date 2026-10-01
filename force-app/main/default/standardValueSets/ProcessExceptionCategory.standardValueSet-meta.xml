@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <sorted>false</sorted>
     <standardValue>
@@ -70,5 +70,10 @@
         <fullName>Commerce Delivery Service</fullName>
         <default>false</default>
         <label>Commerce Delivery Service</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Order Summary Orchestration</fullName>
+        <default>false</default>
+        <label>Order Summary Orchestration</label>
     </standardValue>
 </StandardValueSet>

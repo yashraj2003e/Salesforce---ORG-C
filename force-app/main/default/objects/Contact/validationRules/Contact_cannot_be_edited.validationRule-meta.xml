@@ -1,18 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Contact_cannot_be_edited</fullName>
     <active>true</active>
     <description>Opted out contact cannot be edited.</description>
     <errorConditionFormula>AND(
+NOT($Profile.Name = &apos;System Administrator&apos;),
+NOT($Permission.BYPASS_CONTACT_VALIDATIONS),
 ISPICKVAL(PRIORVALUE(opt_out_YRI__c), &quot;opt out&quot;),
 OR(
 ISCHANGED(AccountId),
-ISCHANGED(award_points__c),
 ISCHANGED(Email),
 ISCHANGED(FirstName),
 ISCHANGED(isactive__c),
 ISCHANGED(LastName),
-ISCHANGED(User__c)
+ISCHANGED(User__c),
+ISCHANGED(opt_out_YRI__c)
 )
 )</errorConditionFormula>
     <errorMessage>Opted out contacts cannot be modified.</errorMessage>
