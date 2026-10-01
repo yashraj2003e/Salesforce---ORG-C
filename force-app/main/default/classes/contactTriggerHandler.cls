@@ -22,6 +22,23 @@ public class contactTriggerHandler extends TriggerHandler {
 
   public override void afterUpdate() {
     syncContactUpdate();
+    contactUserSync();
+  }
+
+  public void contactUserSync() {
+    Map<ID, String> contactEmails = new Map<ID, String>();
+
+    for (ID contact : this.newMap.keyset()) {
+      contact oldContact = this.oldMap.get(contact);
+      contact newContact = this.newMap.get(contact);
+      if (oldContact.email != newContact.email) {
+        contactEmails.put(contact, newContact.email);
+      }
+    }
+
+    if (!contactEmails.isEmpty()) {
+      System.enqueueJob(new contactUserSync(contactEmails));
+    }
   }
 
   public void addIntegrationId() {
