@@ -1,1 +1,35 @@
+# High Level System Design
 
+<img width="3968" height="3790" alt="mermaid-diagram (3)" src="https://github.com/user-attachments/assets/22a70272-8d3a-4d26-90f8-536cbaa3839d" />
+
+# 1) Key Apex Classes High Level Design
+
+## Contact Creation HLD
+
+<img width="2422" height="3016" alt="mermaid-diagram (1)" src="https://github.com/user-attachments/assets/ea369c6d-0080-4091-bbf7-96b30bb0ca27" />
+
+## Contact Update HLD
+
+<img width="2422" height="3016" alt="mermaid-diagram (1)" src="https://github.com/user-attachments/assets/be29d12a-43b5-44e2-aa4d-d4d37a8a47a5" />
+
+# 2) Asynchronous Apex High Level Design
+
+## User Creation Queueable Class
+
+<img width="926" height="2496" alt="mermaid-diagram (4)" src="https://github.com/user-attachments/assets/755e503b-9790-4ea1-8c61-da9b1c6ba1e0" />
+
+## Contact-User Sync Queueable Class
+
+<img width="846" height="1730" alt="mermaid-diagram (5)" src="https://github.com/user-attachments/assets/177c9d02-15fe-4cb6-ac55-d01948e15758" />
+
+## Scrambling Batch Class
+
+<img width="3990" height="2634" alt="mermaid-diagram (6)" src="https://github.com/user-attachments/assets/ad3de2d4-4d83-4d0e-a3b2-d4c3b754549d" />
+
+## User Deactivation Batch Class
+
+<img width="2654" height="2650" alt="mermaid-diagram (7)" src="https://github.com/user-attachments/assets/01724d08-cdb2-43dd-8575-7efab1d20bfe" />
+
+## Transaction List Batch Class
+
+<img width="548" height="1174" alt="mermaid-diagram (8)" src="https://github.com/user-attachments/assets/cd08952b-b502-490d-9962-e2c6ed3daed4" />
