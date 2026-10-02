@@ -1,5 +1,5 @@
 # Environment Details - 
-Salesforce Org Link - https://yashorgb-dev-ed.develop.my.salesforce.com
+Salesforce Org Link - https://yashorgc-dev-ed.develop.my.salesforce.com
 
 # Key Features -
 1) Bi-Directional contact details sync through REST API utilizing below features ->
