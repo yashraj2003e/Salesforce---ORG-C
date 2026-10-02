@@ -11,8 +11,10 @@ Salesforce Org Link - https://yashorgc-dev-ed.develop.my.salesforce.com
    
 4) Platform Event to store Error logs (As the transaction rollsback if the transaction is failed, the error log is not created through direct DML, even asynchronous apex are rolled back. As Platform Events can be set to publish immediately, it is Ideal to generate an error log and throw error simultaneously when required).
    * To capture Debug Logs, the trace should be set on - *Automated Process* user.
+
+5) Scrambling Batch - Mentioning the batch specifically to showcase the utilization of Stateful (Database.stateful). The batch anonymize the data of contact and user, the logic is in place in the same class. The key point here is to avoid Mixed DML as User is a setup object and contact is a non-setup object. This was accomplished by developing a stateful batch and invoking the class twice - one for contact anonymization and one for user.
      
-5) Additional business automation -
+6) Additional business automation -
    * Includes batch processing for deactivation, scrambling, and cleanup-style operations.
    * Applies validation logic to protect related records during Account updates.
 
