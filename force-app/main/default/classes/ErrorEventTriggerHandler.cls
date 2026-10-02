@@ -1,4 +1,4 @@
-public with sharing class ErrorEventTriggerHandler extends TriggerHandler {
+public without sharing class ErrorEventTriggerHandler extends TriggerHandler {
   List<Error_Event__e> newList;
 
   public ErrorEventTriggerHandler() {

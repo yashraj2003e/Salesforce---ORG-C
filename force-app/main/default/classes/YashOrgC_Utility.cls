@@ -18,9 +18,28 @@ public class YashOrgC_Utility {
 
   public static void publishErrorEvent(String errorMsg, String methodName) {
     Error_Event__e err = new Error_Event__e();
-    err.method__c = method;
-    err.description__c = error;
+    err.method__c = errorMsg;
+    err.description__c = methodName;
 
+    EventBus.publish(err);
+  }
+
+  public static void publishErrorEvent(
+    Exception exception_err,
+    String methodName
+  ) {
+    Error_Event__e err = new Error_Event__e();
+    String errorMsg =
+      (String) exception_err.getTypeName() +
+      ': ' +
+      exception_err.getMessage() +
+      ' in method - ' +
+      methodName +
+      '\n' +
+      exception_err.getStackTraceString();
+    err.description__c = errorMsg;
+    err.method__c = methodName;
+    System.debug(err);
     EventBus.publish(err);
   }
 }
