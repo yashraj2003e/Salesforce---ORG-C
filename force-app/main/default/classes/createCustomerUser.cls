@@ -57,7 +57,7 @@ public class createCustomerUser implements Queueable {
 
       update updateUsersOnContact;
     } catch (exception e) {
-      System.enqueueJob(new errorLog(e, createCustomerUserExecute));
+      YashOrgC_Utility.publishErrorEvent(e, createCustomerUserExecute);
       throw e;
     }
   }

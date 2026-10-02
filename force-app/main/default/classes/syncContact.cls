@@ -75,7 +75,7 @@ global without sharing class syncContact {
         update contactsToUpdate;
       }
     } catch (Exception e) {
-      System.enqueueJob(new errorLog(e, syncContactsyncContactMethod));
+      YashOrgC_Utility.publishErrorEvent(e, syncContactsyncContactMethod);
       throw e;
     }
   }

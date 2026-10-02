@@ -67,7 +67,7 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
         executeScramblingNonSetupObjects((List<contact>) objectToScramble);
       }
     } catch (Exception e) {
-      System.enqueueJob(new errorLog(e, BATCH_EXECUTE));
+      YashOrgC_Utility.publishErrorEvent(e, BATCH_EXECUTE);
     }
   }
 
@@ -83,7 +83,7 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
         }
       }
     } catch (exception e) {
-      System.enqueueJob(new errorLog(e, BATCH_FINISH));
+      YashOrgC_Utility.publishErrorEvent(e, BATCH_FINISH);
     }
   }
 
@@ -137,7 +137,7 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
         scrambleAccount(accountIds);
       }
     } catch (exception e) {
-      System.enqueueJob(new errorLog(e, NON_SETUP_OBJECTS));
+      YashOrgC_Utility.publishErrorEvent(e, NON_SETUP_OBJECTS);
     }
   }
 
@@ -172,7 +172,7 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
         }
       }
     } catch (Exception e) {
-      System.enqueueJob(new errorLog(e, SCRAMBLE_ACCOUNT));
+      YashOrgC_Utility.publishErrorEvent(e, SCRAMBLE_ACCOUNT);
     }
   }
 
@@ -200,13 +200,16 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
         for (Database.saveResult sr : scrambledUsers) {
           if (!sr.isSuccess()) {
             for (Database.error er : sr.getErrors()) {
-              System.enqueueJob(new errorLog(er.getMessage(), SETUP_OBJECTS));
+              YashOrgC_Utility.publishErrorEvent(
+                er.getMessage(),
+                SETUP_OBJECTS
+              );
             }
           }
         }
       }
     } catch (exception e) {
-      System.enqueueJob(new errorLog(e, SETUP_OBJECTS));
+      YashOrgC_Utility.publishErrorEvent(e, SETUP_OBJECTS);
     }
   }
 }

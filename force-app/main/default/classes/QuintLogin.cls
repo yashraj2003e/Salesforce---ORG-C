@@ -9,7 +9,7 @@ public with sharing class QuintLogin {
       PageReference pr = Site.login(username, password, sitePrefix);
       return pr != null ? pr.getUrl() : null;
     } catch (Exception e) {
-      System.enqueueJob(new errorLog(e, LOGIN));
+      YashOrgC_Utility.publishErrorEvent(e, LOGIN);
       return null;
     }
   }

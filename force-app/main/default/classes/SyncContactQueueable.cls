@@ -50,7 +50,7 @@ public class SyncContactQueueable implements Queueable, Database.AllowsCallouts 
         );
       }
     } catch (Exception e) {
-      System.enqueueJob(new errorLog(e, syncContactQueueableExecute));
+      YashOrgC_Utility.publishErrorEvent(e, syncContactQueueableExecute);
       throw e;
     }
   }

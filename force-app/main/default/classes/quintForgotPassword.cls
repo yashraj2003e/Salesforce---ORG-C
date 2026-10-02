@@ -16,7 +16,7 @@ public without sharing class quintForgotPassword {
 
       return true;
     } catch (Exception e) {
-      System.enqueueJob(new errorLog(e, FORGOT_PASSWORD));
+      YashOrgC_Utility.publishErrorEvent(e, FORGOT_PASSWORD);
       return false;
     }
   }
@@ -49,7 +49,7 @@ public without sharing class quintForgotPassword {
 
       return !memberships.isEmpty();
     } catch (Exception e) {
-      System.enqueueJob(new errorLog(e, ISVALID_USERNAME));
+      YashOrgC_Utility.publishErrorEvent(e, ISVALID_USERNAME);
       return false;
     }
   }

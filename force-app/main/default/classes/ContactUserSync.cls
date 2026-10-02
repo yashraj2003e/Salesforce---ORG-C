@@ -29,7 +29,10 @@ public with sharing class ContactUserSync implements Queueable {
     for (Database.SaveResult sr : updateResult) {
       if (!sr.isSuccess()) {
         for (Database.Error err : sr.getErrors()) {
-          System.enqueueJob(new errorLog(err.getMessage(), QUEUEABLE_EXECUTE));
+          YashOrgC_Utility.publishErrorEvent(
+            err.getMessage(),
+            QUEUEABLE_EXECUTE
+          );
         }
       }
     }
