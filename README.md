@@ -6,6 +6,9 @@
 2) Automatic User creation and linking through a Queueable APEX, ensuring recursion is prevented through custom permission.
 3) Platform Event to store Error logs (As the transaction rollsback if the transaction is failed, the error log is not created through direct DML, even asynchronous apex are rolled back. As Platform Events can be set to publish immediately, it is Ideal to generate an error log and throw error simultaneously when required).
    * To capture Debug Logs, the trace should be set on - *Automated Process* user.
+4) Additional business automation -
+  * Includes batch processing for deactivation, scrambling, and cleanup-style operations.
+  * Applies validation logic to protect related records during Account updates.
 
 
 # High Level System Design
