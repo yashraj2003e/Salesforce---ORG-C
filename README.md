@@ -1,3 +1,13 @@
+# Key Features -
+1) Contact Data sync between 2 orgs through REST API using below tools ->
+   * Named Credential
+   * Auth Provider
+   * External Client Application (migrated from Connected Application)
+2) Automatic User creation and linking through a Queueable APEX, ensuring recursion is prevented through custom permission.
+3) Platform Event to store Error logs (As the transaction rollsback if the transaction is failed, the error log is not created through direct DML, even asynchronous apex are rolled back. As Platform Events can be set to publish immediately, it is Ideal to generate an error log and throw error simultaneously when required).
+   * To capture Debug Logs, the trace should be set on - *Automated Process* user.
+
+
 # High Level System Design
 
 <img width="3968" height="3790" alt="mermaid-diagram (3)" src="https://github.com/user-attachments/assets/22a70272-8d3a-4d26-90f8-536cbaa3839d" />
