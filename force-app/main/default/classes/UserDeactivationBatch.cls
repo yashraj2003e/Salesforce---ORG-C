@@ -77,9 +77,11 @@ public with sharing class UserDeactivationBatch implements Database.Batchable<SO
       if (currentUser.contactId != null) {
         contactIds.add(currentUser.contactId);
       } else {
-        errorLog.createErrorLog(
-          'Missing Contact for User - ' + String.valueOf(currentUser.Id),
-          DEACTIVATE_USER
+        System.enqueueJob(
+          new errorLog(
+            'Missing Contact for User - ' + String.valueOf(currentUser.Id),
+            DEACTIVATE_USER
+          )
         );
       }
     }
@@ -93,7 +95,9 @@ public with sharing class UserDeactivationBatch implements Database.Batchable<SO
       for (Database.saveResult currentResult : result) {
         if (!currentResult.isSuccess()) {
           for (Database.error errors : currentResult.getErrors()) {
-            errorLog.createErrorLog(errors.getMessage(), DEACTIVATE_USER);
+            System.enqueueJob(
+              new errorLog(errors.getMessage(), DEACTIVATE_USER)
+            );
           }
         }
       }
@@ -113,7 +117,9 @@ public with sharing class UserDeactivationBatch implements Database.Batchable<SO
     for (Database.SaveResult result : results) {
       if (!result.isSuccess()) {
         for (Database.Error error : result.getErrors()) {
-          errorLog.createErrorLog(error.getMessage(), DEACTIVATE_CONTACT);
+          System.enqueueJob(
+            new errorLog(error.getMessage(), DEACTIVATE_CONTACT)
+          );
         }
       }
     }

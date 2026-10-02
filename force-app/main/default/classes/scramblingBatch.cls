@@ -67,7 +67,7 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
         executeScramblingNonSetupObjects((List<contact>) objectToScramble);
       }
     } catch (Exception e) {
-      errorLog.createErrorLog(e, BATCH_EXECUTE);
+      System.enqueueJob(new errorLog(e, BATCH_EXECUTE));
     }
   }
 
@@ -83,7 +83,7 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
         }
       }
     } catch (exception e) {
-      errorLog.createErrorLog(e, BATCH_FINISH);
+      System.enqueueJob(new errorLog(e, BATCH_FINISH));
     }
   }
 
@@ -125,7 +125,9 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
         for (Database.SaveResult sr : scrambledContacts) {
           if (!sr.isSuccess()) {
             for (Database.error er : sr.getErrors()) {
-              errorLog.createErrorLog(er.getMessage(), NON_SETUP_OBJECTS);
+              System.enqueueJob(
+                new errorLog(er.getMessage(), NON_SETUP_OBJECTS)
+              );
             }
           }
         }
@@ -135,7 +137,7 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
         scrambleAccount(accountIds);
       }
     } catch (exception e) {
-      errorLog.createErrorLog(e, NON_SETUP_OBJECTS);
+      System.enqueueJob(new errorLog(e, NON_SETUP_OBJECTS));
     }
   }
 
@@ -162,13 +164,15 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
         for (Database.saveResult sr : scrambledAccounts) {
           if (!sr.isSuccess()) {
             for (Database.error er : sr.getErrors()) {
-              errorLog.createErrorLog(er.getMessage(), SCRAMBLE_ACCOUNT);
+              System.enqueueJob(
+                new errorLog(er.getMessage(), SCRAMBLE_ACCOUNT)
+              );
             }
           }
         }
       }
     } catch (Exception e) {
-      errorLog.createErrorLog(e, SCRAMBLE_ACCOUNT);
+      System.enqueueJob(new errorLog(e, SCRAMBLE_ACCOUNT));
     }
   }
 
@@ -196,13 +200,13 @@ public class scramblingBatch implements Database.Batchable<SObject>, Database.st
         for (Database.saveResult sr : scrambledUsers) {
           if (!sr.isSuccess()) {
             for (Database.error er : sr.getErrors()) {
-              errorLog.createErrorLog(er.getMessage(), SETUP_OBJECTS);
+              System.enqueueJob(new errorLog(er.getMessage(), SETUP_OBJECTS));
             }
           }
         }
       }
     } catch (exception e) {
-      errorLog.createErrorLog(e, SETUP_OBJECTS);
+      System.enqueueJob(new errorLog(e, SETUP_OBJECTS));
     }
   }
 }

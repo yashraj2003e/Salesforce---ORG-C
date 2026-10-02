@@ -9,7 +9,7 @@ public class errorLogTest {
       c.email = 't@gmail.com';
       insert c;
     } catch (exception e) {
-      errorLog.createErrorLog(e, strErrorLogTestTestLog);
+      System.enqueueJob(new errorLog(e, strErrorLogTestTestLog));
     }
   }
 }

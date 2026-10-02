@@ -13,9 +13,8 @@ public class errorLogTest1 {
       contact invalidContact = new contact();
       insert invalidContact; // Missing required fields
     } catch (exception e) {
-      errorLog.createErrorLog(
-        e,
-        'errorLogTest.testCreateErrorLogWithException'
+      System.enqueueJob(
+        new errorLog(e, 'errorLogTest.testCreateErrorLogWithException')
       );
     }
 
@@ -26,9 +25,11 @@ public class errorLogTest1 {
 
   @isTest
   static void testCreateErrorLogWithMessage() {
-    errorLog.createErrorLog(
-      'Test error message',
-      'errorLogTest.testCreateErrorLogWithMessage'
+    System.enqueueJob(
+      new errorLog(
+        'Test error message',
+        'errorLogTest.testCreateErrorLogWithMessage'
+      )
     );
 
     List<error_log__c> logs = [SELECT id, Description__c FROM error_log__c];

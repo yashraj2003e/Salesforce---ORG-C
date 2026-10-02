@@ -1,4 +1,6 @@
 public with sharing class ContactUserSync implements Queueable {
+  final String QUEUEABLE_EXECUTE = 'ContactUserSync.execute';
+
   Map<ID, String> contacts = new Map<ID, String>();
 
   public ContactUserSync(Map<ID, String> contactsToSync) {
@@ -19,6 +21,17 @@ public with sharing class ContactUserSync implements Queueable {
       curUser.username = contacts.get(curUser.ContactId);
     }
 
-    update usersToUpdate;
+    List<Database.saveResult> updateResult = Database.update(
+      usersToUpdate,
+      false
+    );
+
+    for (Database.SaveResult sr : updateResult) {
+      if (!sr.isSuccess()) {
+        for (Database.Error err : sr.getErrors()) {
+          System.enqueueJob(new errorLog(err.getMessage(), QUEUEABLE_EXECUTE));
+        }
+      }
+    }
   }
 }

@@ -57,7 +57,7 @@ public class createCustomerUser implements Queueable {
 
       update updateUsersOnContact;
     } catch (exception e) {
-      errorlog.createErrorLog(e, createCustomerUserExecute);
+      System.enqueueJob(new errorLog(e, createCustomerUserExecute));
       throw e;
     }
   }

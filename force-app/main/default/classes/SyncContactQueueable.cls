@@ -45,10 +45,12 @@ public class SyncContactQueueable implements Queueable, Database.AllowsCallouts 
           res.getBody() +
           'status code - ' +
           res.getStatusCode();
-        errorLog.createErrorLog(resultData, syncContactQueueableExecute);
+        System.enqueueJob(
+          new errorLog(resultData, syncContactQueueableExecute)
+        );
       }
     } catch (Exception e) {
-      errorLog.createErrorLog(e, syncContactQueueableExecute);
+      System.enqueueJob(new errorLog(e, syncContactQueueableExecute));
       throw e;
     }
   }

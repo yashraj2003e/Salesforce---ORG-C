@@ -75,7 +75,7 @@ global without sharing class syncContact {
         update contactsToUpdate;
       }
     } catch (Exception e) {
-      errorLog.createErrorLog(e, syncContactsyncContactMethod);
+      System.enqueueJob(new errorLog(e, syncContactsyncContactMethod));
       throw e;
     }
   }
