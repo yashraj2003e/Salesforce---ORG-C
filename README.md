@@ -1,18 +1,56 @@
-# Salesforce DX Project: Next Steps
+# Environment Details - 
+Salesforce Org Link - https://yashorgc-dev-ed.develop.my.salesforce.com
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+# Key Features -
+1) Bi-Directional contact details sync through REST API utilizing below features ->
+   * Named Credential
+   * Auth Provider
+   * External Client Application (migrated from Connected Application)
+     
+2) Automatic User creation and linking through a Queueable APEX, ensuring recursion is prevented through custom permission.
+   
+4) Platform Event to store Error logs (As the transaction rollsback if the transaction is failed, the error log is not created through direct DML, even asynchronous apex are rolled back. As Platform Events can be set to publish immediately, it is Ideal to generate an error log and throw error simultaneously when required).
+   * To capture Debug Logs, the trace should be set on - *Automated Process* user.
 
-## How Do You Plan to Deploy Your Changes?
+5) Scrambling Batch - Mentioning the batch specifically to showcase the utilization of Stateful (Database.stateful). The batch anonymize the data of contact and user, the logic is in place in the same class. The key point here is to avoid Mixed DML as User is a setup object and contact is a non-setup object. This was accomplished by developing a stateful batch and invoking the class twice - one for contact anonymization and one for user.
+     
+6) Additional business automation -
+   * Includes batch processing for deactivation, scrambling, and cleanup-style operations.
+   * Applies validation logic to protect related records during Account updates.
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
 
-## Configure Your Salesforce DX Project
+# High Level System Design
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+<img width="3968" height="3790" alt="mermaid-diagram (3)" src="https://github.com/user-attachments/assets/22a70272-8d3a-4d26-90f8-536cbaa3839d" />
 
-## Read All About It
+# 1) Key Apex Classes High Level Design
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+## Contact Creation HLD
+
+<img width="2422" height="3016" alt="mermaid-diagram (1)" src="https://github.com/user-attachments/assets/ea369c6d-0080-4091-bbf7-96b30bb0ca27" />
+
+## Contact Update HLD
+
+<img width="2422" height="3016" alt="mermaid-diagram (1)" src="https://github.com/user-attachments/assets/be29d12a-43b5-44e2-aa4d-d4d37a8a47a5" />
+
+# 2) Asynchronous Apex High Level Design
+
+## User Creation Queueable Class
+
+<img width="926" height="2496" alt="mermaid-diagram (4)" src="https://github.com/user-attachments/assets/755e503b-9790-4ea1-8c61-da9b1c6ba1e0" />
+
+## Contact-User Sync Queueable Class
+
+<img width="846" height="1730" alt="mermaid-diagram (5)" src="https://github.com/user-attachments/assets/177c9d02-15fe-4cb6-ac55-d01948e15758" />
+
+## Scrambling Batch Class
+
+<img width="3990" height="2634" alt="mermaid-diagram (6)" src="https://github.com/user-attachments/assets/ad3de2d4-4d83-4d0e-a3b2-d4c3b754549d" />
+
+## User Deactivation Batch Class
+
+<img width="2654" height="2650" alt="mermaid-diagram (7)" src="https://github.com/user-attachments/assets/01724d08-cdb2-43dd-8575-7efab1d20bfe" />
+
+## Transaction List Batch Class
+
+<img width="548" height="1174" alt="mermaid-diagram (8)" src="https://github.com/user-attachments/assets/cd08952b-b502-490d-9962-e2c6ed3daed4" />
