@@ -1,4 +1,4 @@
-public class errorLog implements Queueable {
+public without sharing class errorLog implements Queueable {
   public Exception exception_err;
   public String err;
   public String methodName;
@@ -39,6 +39,10 @@ public class errorLog implements Queueable {
     er.Description__c = errorData;
     er.Method__c = methodName;
     insert er;
+
+    if (exception_err != null) {
+      throw exception_err;
+    }
   }
 
   // public static void createErrorLog(string e,String methodName) {
