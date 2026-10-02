@@ -1,5 +1,5 @@
 # Key Features -
-1) Contact Data sync between 2 orgs through REST API using below concepts ->
+1) Bi-Directional contact details sync through REST API utilizing below features ->
    * Named Credential
    * Auth Provider
    * External Client Application (migrated from Connected Application)
