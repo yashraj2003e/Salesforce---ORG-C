@@ -53,18 +53,93 @@
 // update amer;
 // update emea;
 
-public Integer deactivationDays = 5;
-DateTime deactivationDate = System.now().addDays(-deactivationDays);
-List<User> users = [
-  SELECT id
-  FROM User
-  WHERE
-    profile.userLicense.name IN (
-      'Customer Community',
-      'Customer Community plus'
-    )
-    AND (lastlogindate < :deactivationDate
-    OR (lastlogindate = NULL
-    AND createddate < :deactivationDate))
-];
-System.debug(users);
+// public Integer deactivationDays = 5;
+// DateTime deactivationDate = System.now().addDays(-deactivationDays);
+// List<User> users = [
+//   SELECT id
+//   FROM User
+//   WHERE
+//     profile.userLicense.name IN (
+//       'Customer Community',
+//       'Customer Community plus'
+//     )
+//     AND (lastlogindate < :deactivationDate
+//     OR (lastlogindate = NULL
+//     AND createddate < :deactivationDate))
+// ];
+// System.debug(users);
+
+// String url = 'https://xyadadadz.com/abcd/ghi';
+
+// Integer protocolEnd = url.indexOf('://');
+// Integer pathStart = url.indexOf('/', protocolEnd + 3);
+
+// String mainUrl = pathStart == -1
+//     ? url
+//     : url.substring(0, pathStart);
+
+//System.debug(mainUrl);
+// https://xyz.com
+
+// List<CspTrustedSite> trustedSites = new List<CspTrustedSite>();
+
+// trustedSites.add(new CspTrustedSite(
+//     DeveloperName = 'Example1',
+//     MasterLabel = 'Example1',
+//     EndpointUrl = 'https://example1.com',
+//     IsActive = true,
+//     Context = 'ExperienceBuilder',
+//     IsApplicableToConnectSrc = true,
+//     IsApplicableToFrameSrc = true,
+//     IsApplicableToImgSrc = false,
+//     IsApplicableToStyleSrc = false,
+//     IsApplicableToFontSrc = false,
+//     IsApplicableToMediaSrc = false,
+//     CanAccessCamera = false,
+//     CanAccessMicrophone = false
+// ));
+
+// trustedSites.add(new CspTrustedSite(
+//     DeveloperName = 'Example2',
+//     MasterLabel = 'Example2',
+//     EndpointUrl = 'https://example2.com',
+//     IsActive = true,
+//     Context = 'ExperienceBuilder',
+//     IsApplicableToConnectSrc = true,
+//     IsApplicableToFrameSrc = true,
+//     IsApplicableToImgSrc = false,
+//     IsApplicableToStyleSrc = false,
+//     IsApplicableToFontSrc = false,
+//     IsApplicableToMediaSrc = false,
+//     CanAccessCamera = false,
+//     CanAccessMicrophone = false
+// ));
+
+// insert trustedSites;
+
+// csptrustedsite csp = new CspTrustedSite(
+//     DeveloperName = 'Example2',
+//     MasterLabel = 'Example2',
+//     EndpointUrl = 'https://example2.com',
+//     IsActive = true,
+//     Context = 'ExperienceBuilder',
+//     IsApplicableToConnectSrc = true,
+//     IsApplicableToFrameSrc = true,
+//     IsApplicableToImgSrc = false,
+//     IsApplicableToStyleSrc = false,
+//     IsApplicableToFontSrc = false,
+//     IsApplicableToMediaSrc = false,
+//     CanAccessCamera = false,
+//     CanAccessMicrophone = false
+// );
+
+// insert csp;
+
+
+
+
+ID contactId = [select contactid from user where id = :UserInfo.getUserId()].contactId;
+
+string query = 'SELECT ' + dataToQuery + ' FROM CONTACT WHERE ID =: contactId';
+
+Contact contactData = database.query(query);

@@ -1,0 +1,18 @@
+<template>
+  <iframe
+    name="externalContentFrame"
+    src={endpointURL}
+    height="600px"
+    width="100%"
+    frameborder="0"
+  ></iframe>
+
+  <form
+    action={endpointURL}
+    method={method}
+    class="slds-hidden"
+    target="externalContentFrame"
+  >
+    <input class="slds-hidden" name="query" value={outboundData} />
+  </form>
+</template>
