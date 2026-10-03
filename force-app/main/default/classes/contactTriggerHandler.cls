@@ -129,7 +129,12 @@ public class contactTriggerHandler extends TriggerHandler {
       'Data_Integration_User'
     );
     if (canSync) {
-      contactsToSync.addAll(this.newList);
+      // contactsToSync.addAll(this.newList);
+      for (contact curContact : this.newList) {
+        if (curContact.should_sync__c == true) {
+          contactsToSync.add(curContact);
+        }
+      }
     }
     if (!contactsToSync.isEmpty()) {
       System.enqueueJob(new syncContactQueueable(contactsToSync));
