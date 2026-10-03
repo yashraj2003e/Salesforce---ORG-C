@@ -16,6 +16,15 @@ public class YashOrgC_Utility {
     return min + Math.mod(Math.abs(Crypto.getRandomInteger()), (max - min + 1));
   }
 
+  public static String urlCleanup(String url) {
+    Integer protocolEnd = url.indexOf('://');
+    Integer pathStart = url.indexOf('/', protocolEnd + 3);
+
+    String mainUrl = pathStart == -1 ? url : url.substring(0, pathStart);
+
+    return mainUrl;
+  }
+
   public static void publishErrorEvent(String errorMsg, String methodName) {
     Error_Event__e err = new Error_Event__e();
     err.method__c = errorMsg;

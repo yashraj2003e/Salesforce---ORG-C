@@ -1,4 +1,5 @@
 public with sharing class yashOrgCConstants {
+  public static final String ORG_URL = 'https://yashorgc-dev-ed.develop.my.salesforce.com';
   public static final String INVALID = '.invalid';
   public static final String OPT_OUT = 'opt out';
   public static final String REQUESTED = 'requested';
