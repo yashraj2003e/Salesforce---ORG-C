@@ -21,8 +21,14 @@ public class contactTriggerHandler extends TriggerHandler {
   }
 
   public override void afterUpdate() {
+    shouldSyncCheck();
     syncContactUpdate();
     contactUserSync();
+  }
+
+  public void shouldSyncCheck() {
+    // * To add the logic to prevent marking the checkbox - "should_sync__c" as whether to sync contact details or not
+    // * can only be selected during contact insertion and cannot be modified later
   }
 
   public void contactUserSync() {
