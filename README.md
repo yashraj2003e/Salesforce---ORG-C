@@ -19,9 +19,13 @@ Salesforce Org Link - https://yashorgc-dev-ed.develop.my.salesforce.com
    * Applies validation logic to protect related records during Account updates.
 
 
-# High Level System Design
+# High Level System Design (Backend Systen)
 
 <img width="3968" height="3790" alt="mermaid-diagram (3)" src="https://github.com/user-attachments/assets/22a70272-8d3a-4d26-90f8-536cbaa3839d" />
+
+# High Level System Design (Frontend Systen)
+
+<img width="1536" height="1024" alt="Salesforce Community Architecture Flowchart" src="https://github.com/user-attachments/assets/eb4153fe-a907-45b2-83ec-19c424c6f5b3" />
 
 # 1) External Content Renderer (iFrame) High Level Design
 
