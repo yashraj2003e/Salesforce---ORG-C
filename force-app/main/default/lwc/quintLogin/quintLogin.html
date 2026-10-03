@@ -1,9 +1,48 @@
 <template>
-  <h1>LOGIN</h1>
-  <input type="text" onkeyup={handleCredentialChange} name="username" />
-  <input type="password" onkeyup={handleCredentialChange} name="password" />
-  <button type="submit" onclick={handleSubmit}>Submit</button>
-  <div>
-    <h3 if:true={error}>{error}</h3>
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="logo">Q</div>
+        <h1>Welcome Back</h1>
+        <p>Sign in to continue to your account</p>
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          name="username"
+          placeholder="Enter your username"
+          onkeyup={handleCredentialChange}
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          placeholder="Enter your password"
+          onkeyup={handleCredentialChange}
+        />
+      </div>
+
+      <template if:true={error}>
+        <div class="error-message">
+          <span>⚠</span>
+          <span>{error}</span>
+        </div>
+      </template>
+
+      <button type="button" class="login-button" onclick={handleSubmit}>
+        Sign In
+      </button>
+
+      <div class="login-footer">
+        <a href="#">Forgot your password?</a>
+      </div>
+    </div>
   </div>
 </template>
