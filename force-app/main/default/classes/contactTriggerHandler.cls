@@ -97,7 +97,20 @@ public class contactTriggerHandler extends TriggerHandler {
       update updatedContacts;
     }
 
-    System.enqueueJob(new createCustomerUser(this.newList));
+
+    //* Start
+    //* Only create users when the checkbox "create_user__c" is checked
+    List<contact> usersToCreate = new List<contact>();
+
+    for(contact curContact : this.newList) {
+      if(curContact.create_user__c == true) {
+        usersToCreate.add(curContact);
+      }
+    }
+
+    System.enqueueJob(new createCustomerUser(usersToCreate));
+    //* End
+    
     syncContactUpdate();
   }
 
