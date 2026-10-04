@@ -1,10 +1,18 @@
 <template>
+  <template lwc:if={isLoading}>
+    <div class="spinner-container">
+      <lightning-spinner alternative-text="Loading" size="medium">
+      </lightning-spinner>
+    </div>
+  </template>
+
   <iframe
     name="externalContentFrame"
     src={endpointURL}
     height="600px"
     width="100%"
     frameborder="0"
+    onload={handleiFrameLoad}
   ></iframe>
 
   <form
