@@ -1,4 +1,4 @@
-public without sharing class ExternalContent {
+public with sharing class ExternalContent {
   @AuraEnabled(cacheable=true)
   public static Map<String, String> getExternalContentDetails(
     String ExternalContentName
