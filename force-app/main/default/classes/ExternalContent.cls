@@ -1,5 +1,5 @@
 public with sharing class ExternalContent {
-  @AuraEnabled(cacheable=true)
+  @AuraEnabled(cacheable=false)
   public static Map<String, String> getExternalContentDetails(
     String ExternalContentName
   ) {
