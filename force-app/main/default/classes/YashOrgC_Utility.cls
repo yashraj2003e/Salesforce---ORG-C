@@ -1,4 +1,8 @@
 public class YashOrgC_Utility {
+
+  public static String userContactId;
+
+
   public static String appendSafe(String value) {
     if (value == null) {
       return '';
@@ -14,6 +18,18 @@ public class YashOrgC_Utility {
     Integer min = 0;
     Integer max = yashOrgCConstants.marketIds.size() - 1;
     return min + Math.mod(Math.abs(Crypto.getRandomInteger()), (max - min + 1));
+  }
+
+  public static ID getContactId() {
+    if(userContactId == null) {
+      userContactId = [
+        SELECT contactid
+        FROM user
+        WHERE id = :UserInfo.getUserId()
+      ]
+      .contactId;
+    }
+    return userContactId;
   }
 
   public static String urlCleanup(String url) {

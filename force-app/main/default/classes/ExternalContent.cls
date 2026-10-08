@@ -36,21 +36,20 @@ public with sharing class ExternalContent {
         ';'
       );
 
-      String dataToQuery = '';
+      // * Migrated to "String.join(iterable,string)" below
+      // String dataToQuery = '';
 
-      for (string parameter : outboundParameters) {
-        dataToQuery += parameter;
-        dataToQuery += ',';
-      }
+      // for (string parameter : outboundParameters) {
+      //   dataToQuery += parameter;
+      //   dataToQuery += ',';
+      // }
 
-      dataToQuery = dataToQuery.substring(0, dataToQuery.length() - 1);
+      // dataToQuery = dataToQuery.substring(0, dataToQuery.length() - 1);
 
-      ID contactId = [
-        SELECT contactid
-        FROM user
-        WHERE id = :UserInfo.getUserId()
-      ]
-      .contactId;
+
+      String dataToQuery = string.join(outboundParameters,',');
+
+      ID contactId = YashOrgC_Utility.getContactId();
 
       string query =
         'SELECT ' +

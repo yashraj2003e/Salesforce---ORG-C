@@ -138,8 +138,21 @@
 
 
 
-ID contactId = [select contactid from user where id = :UserInfo.getUserId()].contactId;
+// ID contactId = [select contactid from user where id = :UserInfo.getUserId()].contactId;
 
-string query = 'SELECT ' + dataToQuery + ' FROM CONTACT WHERE ID =: contactId';
+// string query = 'SELECT ' + dataToQuery + ' FROM CONTACT WHERE ID =: contactId';
 
-Contact contactData = database.query(query);
+// Contact contactData = database.query(query);
+
+
+// List<String> params = new List<String>{'Name','Value'};
+// System.debug(string.join(params,','));
+
+System.debug('Before: ' + Limits.getQueries());
+
+List<Account> accounts = [
+    SELECT Id, Name
+    FROM Account
+];
+
+System.debug('After: ' + Limits.getQueries());
