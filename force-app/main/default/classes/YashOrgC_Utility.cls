@@ -1,7 +1,5 @@
 public class YashOrgC_Utility {
-
   public static String userContactId;
-
 
   public static String appendSafe(String value) {
     if (value == null) {
@@ -21,7 +19,7 @@ public class YashOrgC_Utility {
   }
 
   public static ID getContactId() {
-    if(userContactId == null) {
+    if (userContactId == null) {
       userContactId = [
         SELECT contactid
         FROM user
@@ -39,6 +37,35 @@ public class YashOrgC_Utility {
     String mainUrl = pathStart == -1 ? url : url.substring(0, pathStart);
 
     return mainUrl;
+  }
+
+  // * Added logging metrics to compare before vs after
+  public static void logUsage(String checkpoint) {
+    System.debug(
+      LoggingLevel.WARN,
+      'Checkpoint: ' +
+        checkpoint +
+        ' | SOQL: ' +
+        Limits.getQueries() +
+        '/' +
+        Limits.getLimitQueries() +
+        ' | SOQL Rows: ' +
+        Limits.getQueryRows() +
+        '/' +
+        Limits.getLimitQueryRows() +
+        ' | DML: ' +
+        Limits.getDmlStatements() +
+        '/' +
+        Limits.getLimitDmlStatements() +
+        ' | Heap: ' +
+        Limits.getHeapSize() +
+        '/' +
+        Limits.getLimitHeapSize() +
+        ' | CPU: ' +
+        Limits.getCpuTime() +
+        '/' +
+        Limits.getLimitCpuTime()
+    );
   }
 
   public static void publishErrorEvent(String errorMsg, String methodName) {
